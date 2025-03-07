@@ -1,0 +1,23 @@
+<div class="player-form-container">
+  <h2>{{ isEditMode ? '✏️ Editar Jugador' : '➕ Agregar Jugador' }}</h2>
+
+  <form (ngSubmit)="savePlayer()">
+    <label>Nombre</label>
+    <input type="text" [(ngModel)]="player.nombre" name="nombre" required>
+
+    <label>Equipo</label>
+    <input type="text" [(ngModel)]="player.equipo" name="equipo" required>
+
+    <label>Nacionalidad</label>
+    <input type="text" [(ngModel)]="player.nacionalidad" name="nacionalidad" required>
+
+    <label>Fecha de Nacimiento</label>
+    <input type="date" [(ngModel)]="player.fecha_nacimiento" name="fecha_nacimiento" required>
+
+    <label>Foto de Perfil (URL)</label>
+    <input type="text" [(ngModel)]="player.profile_picture" name="profile_picture">
+
+    <button type="submit">{{ isEditMode ? 'Guardar Cambios' : 'Agregar Jugador' }}</button>
+    <button type="button" (click)="navigateToPlayers()">Cancelar</button>
+  </form>
+</div>

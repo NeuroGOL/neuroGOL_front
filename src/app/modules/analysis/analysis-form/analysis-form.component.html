@@ -1,0 +1,26 @@
+<div class="analysis-form-container">
+  <h2>{{ isEditMode ? '✏️ Editar Análisis' : '➕ Agregar Análisis' }}</h2>
+
+  <form (ngSubmit)="saveAnalysis()">
+    <label>Jugador</label>
+    <select [(ngModel)]="analysis.player_id" name="player_id" required>
+      <option *ngFor="let player of players.values()" [value]="player.id">
+        {{ player.nombre }}
+      </option>
+    </select>
+
+    <label>Categoría</label>
+    <select [(ngModel)]="analysis.categoria_texto" name="categoria_texto" required>
+      <option value="Previo al partido">Previo al partido</option>
+      <option value="Post-partido">Post-partido</option>
+      <option value="Durante entrenamiento">Durante entrenamiento</option>
+      <option value="Lesión">Lesión</option>
+    </select>
+
+    <label>Comentario</label>
+    <textarea [(ngModel)]="analysis.texto" name="texto" required></textarea>
+
+    <button type="submit">{{ isEditMode ? 'Guardar Cambios' : 'Agregar Análisis' }}</button>
+    <button type="button" (click)="navigateToAnalysisList()">Cancelar</button>
+  </form>
+</div>

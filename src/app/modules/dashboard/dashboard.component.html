@@ -1,0 +1,14 @@
+<div class="dashboard-container">
+  <header class="header">
+    <h1>📊 Dashboard</h1>
+    <button (click)="logout()">🚪 Cerrar Sesión</button>
+  </header>
+
+  <div class="grid">
+    <a routerLink="/dashboard/players" class="card">⚽ Gestionar Jugadores</a>
+    <a routerLink="/dashboard/analysis" class="card">📋 Análisis de Emociones</a>
+    <a routerLink="/dashboard/reports" class="card">📊 Reportes</a>
+  </div>
+
+  <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,118 @@
+/* 🔹 Fondo oscuro del modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Fondo oscuro con transparencia */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* 🔹 Caja del modal */
+.modal {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  width: 90%;
+  text-align: left;
+  position: relative;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* 🔹 Animación de entrada */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 🔹 Título del modal */
+.modal h3 {
+  text-align: center;
+  font-size: 22px;
+  margin-bottom: 15px;
+}
+
+/* 🔹 Contenido del análisis */
+.modal p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #333;
+}
+
+/* 🔹 Contenedor de botones */
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+/* 🔹 Botón de generar reporte */
+.modal .generate-report {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  flex: 1;
+  margin-right: 10px;
+  transition: background 0.3s;
+}
+
+.modal .generate-report:hover {
+  background-color: #2980b9;
+}
+
+/* 🔹 Deshabilitar el botón cuando el reporte ya está generado */
+.modal .generate-report:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
+}
+
+/* 🔹 Botón de cerrar */
+.modal .close-btn {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  flex: 1;
+  transition: background 0.3s;
+}
+
+.modal .close-btn:hover {
+  background-color: #c0392b;
+}
+
+/* 🔹 Responsive */
+@media (max-width: 600px) {
+  .modal {
+    max-width: 95%;
+    padding: 15px;
+  }
+
+  .modal-buttons {
+    flex-direction: column;
+  }
+
+  .modal .generate-report,
+  .modal .close-btn {
+    width: 100%;
+    margin: 5px 0;
+  }
+}

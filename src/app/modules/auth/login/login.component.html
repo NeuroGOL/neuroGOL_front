@@ -1,0 +1,17 @@
+<div class="login-container">
+  <h2>🔐 Iniciar Sesión</h2>
+  <form (submit)="login()">
+    <label>Email</label>
+    <input type="email" [(ngModel)]="credentials.email" name="email" required>
+
+    <label>Contraseña</label>
+    <input type="password" [(ngModel)]="credentials.contrasena" name="contrasena" required> 
+    <!-- 🔹 Cambiar "password" por "contrasena" -->
+
+    <button type="submit" [disabled]="isLoading">🔓 Acceder</button>
+
+    <p>¿No tienes cuenta? <a routerLink="/register">Regístrate</a></p>
+
+    <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+  </form>
+</div>

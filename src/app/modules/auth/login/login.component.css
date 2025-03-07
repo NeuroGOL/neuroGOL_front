@@ -1,0 +1,86 @@
+/* 📌 Contenedor principal del login */
+.login-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* 📌 Título */
+.login-container h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* 📌 Formulario */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* 📌 Etiquetas */
+label {
+  font-size: 14px;
+  font-weight: bold;
+  color: #444;
+  text-align: left;
+  display: block;
+}
+
+/* 📌 Campos de entrada */
+input {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: border 0.3s ease-in-out;
+}
+
+input:focus {
+  border-color: #3498db;
+  outline: none;
+}
+
+/* 📌 Botón de acceso */
+button {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background: #3498db;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+button:hover {
+  background: #2980b9;
+}
+
+button:disabled {
+  background: #bdc3c7;
+  cursor: not-allowed;
+}
+
+/* 📌 Mensaje de error */
+.error {
+  color: #e74c3c;
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* 📌 Diseño responsivo */
+@media (max-width: 480px) {
+  .login-container {
+    width: 90%;
+  }
+}

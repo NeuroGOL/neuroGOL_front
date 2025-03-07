@@ -1,0 +1,78 @@
+.player-analysis-container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.player-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.player-info img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.player-info h3 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.player-info p {
+  margin: 5px 0;
+  color: #555;
+}
+
+.analysis-list {
+  margin-top: 20px;
+}
+
+.analysis-card {
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+.analysis-card p {
+  margin: 5px 0;
+}
+
+button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+@media (max-width: 600px) {
+  .player-info {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .player-info img {
+    width: 100px;
+    height: 100px;
+  }
+}

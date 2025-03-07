@@ -1,0 +1,23 @@
+<div class="auth-container">
+  <h2>📝 Registro</h2>
+
+  <form (submit)="register()">
+    <label>Nombre</label>
+    <input type="text" [(ngModel)]="nombre" name="nombre" required>
+
+    <label>Email</label>
+    <input type="email" [(ngModel)]="email" name="email" required>
+
+    <label>Contraseña</label>
+    <input type="password" [(ngModel)]="contrasena" name="contrasena" required>
+
+    <label>Foto de Perfil (Opcional)</label>
+    <input type="text" [(ngModel)]="profile_picture" name="profile_picture" placeholder="URL de la imagen">
+
+    <button type="submit" [disabled]="isLoading">📩 Registrarse</button>
+
+    <p>¿Ya tienes cuenta? <a routerLink="/login">Inicia sesión</a></p>
+
+    <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+  </form>
+</div>

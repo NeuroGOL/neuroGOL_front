@@ -1,0 +1,17 @@
+<h2>📊 Reportes Generados</h2>
+
+<app-reports-chart></app-reports-chart>
+<app-reports-timeline></app-reports-timeline> <!-- Agregamos la nueva gráfica -->
+
+<div class="pagination-controls">
+  <button (click)="prevPage()" [disabled]="page === 1">⬅️ Anterior</button>
+  <span>Página {{ page }} de {{ totalPages }}</span>
+  <button (click)="nextPage()" [disabled]="page === totalPages">Siguiente ➡️</button>
+</div>
+
+<div class="report-card" *ngFor="let report of reports">
+  <p><strong>ID Reporte:</strong> {{ report.id }}</p>
+  <p><strong>ID Jugador:</strong> {{ report.player_id }}</p>
+  <p><strong>ID Análisis:</strong> {{ report.analysis_id }}</p>
+  <p><strong>Generado por:</strong> {{ report.generado_por }}</p>
+</div>

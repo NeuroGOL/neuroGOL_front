@@ -1,0 +1,89 @@
+.players-container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.players-container h2 {
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 15px;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+th, td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+td img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+td button {
+  margin: 5px;
+  padding: 8px 12px;
+  font-size: 14px;
+}
+
+td button:first-child {
+  background-color: #f1c40f;
+}
+
+td button:first-child:hover {
+  background-color: #d4ac0d;
+}
+
+td button:last-child {
+  background-color: #e74c3c;
+}
+
+td button:last-child:hover {
+  background-color: #c0392b;
+}
+
+/* 📌 Responsivo para pantallas pequeñas */
+@media (max-width: 600px) {
+  table {
+    font-size: 14px;
+  }
+
+  td img {
+    width: 40px;
+    height: 40px;
+  }
+
+  td button {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+}

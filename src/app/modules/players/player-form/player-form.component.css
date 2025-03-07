@@ -1,0 +1,91 @@
+.player-form-container {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.player-form-container h2 {
+  font-size: 22px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: bold;
+  text-align: left;
+  margin-bottom: 5px;
+  display: block;
+  color: #444;
+}
+
+input {
+  width: 100%;
+  padding: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: border 0.3s ease-in-out;
+}
+
+input:focus {
+  border-color: #3498db;
+  outline: none;
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+  margin-top: 10px;
+}
+
+/* Botón principal */
+button[type="submit"] {
+  background-color: #2ecc71;
+  color: white;
+}
+
+button[type="submit"]:hover {
+  background-color: #27ae60;
+}
+
+/* Botón de cancelar */
+button[type="button"] {
+  background-color: #e74c3c;
+  color: white;
+}
+
+button[type="button"]:hover {
+  background-color: #c0392b;
+}
+
+/* 📌 Responsivo */
+@media (max-width: 600px) {
+  .player-form-container {
+    max-width: 90%;
+    padding: 15px;
+  }
+
+  input {
+    font-size: 14px;
+  }
+
+  button {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
