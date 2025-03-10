@@ -27,8 +27,8 @@ export class ReportsListComponent {
   loadReports() {
     this.reportsService.getReports().subscribe({
       next: (data) => {
-        this.reportsService.cacheReports(data); // Ahora sí se puede llamar
-        this.totalPages = Math.ceil(data.length / this.pageSize);
+        this.reports = data; // Cargar reportes directamente
+        this.totalPages = Math.ceil(this.reports.length / this.pageSize);
         this.updatePage();
       },
       error: (err) => console.error('Error al obtener reportes:', err)
@@ -36,7 +36,8 @@ export class ReportsListComponent {
   }
 
   updatePage() {
-    this.reports = this.reportsService.getPaginatedReports(this.page, this.pageSize);
+    const startIndex = (this.page - 1) * this.pageSize;
+    this.reports = this.reports.slice(startIndex, startIndex + this.pageSize);
   }
 
   nextPage() {

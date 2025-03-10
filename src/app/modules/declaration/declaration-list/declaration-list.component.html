@@ -1,0 +1,46 @@
+<div class="declaration-list-container">
+  <h2>📜 Declaraciones</h2>
+
+  <div *ngIf="declarations.length === 0" class="empty-state">
+    <p>No hay declaraciones registradas.</p>
+  </div>
+
+  <ul class="declaration-list" *ngIf="declarations.length > 0">
+    <li *ngFor="let declaration of declarations">
+      
+      <!-- 🔹 Contenedor de la información del jugador -->
+      <div class="player-info">
+        <img [src]="getPlayerImage(declaration.player_id)" alt="Jugador">
+        <div>
+          <h3>{{ getPlayerName(declaration.player_id) }}</h3>
+          <p>{{ getPlayerTeam(declaration.player_id) }}</p>
+        </div>
+      </div>
+
+      <!-- 🔹 Contenido de la declaración -->
+      <div class="declaration-content">
+        <p><strong>Categoría:</strong> {{ declaration.categoria_texto }}</p>
+        <p class="declaration-text">"{{ declaration.texto }}"</p>
+      </div>
+
+      <!-- 🔹 Botones de acciones -->
+      <div class="buttons">
+        <button (click)="analyzeDeclaration(declaration.id!)" class="analyze-btn">
+          🔍 {{ nlpAnalyses.has(declaration.id!) ? 'Ver Análisis' : 'Analizar' }}
+        </button>
+
+        <button (click)="deleteDeclaration(declaration.id!)" class="delete-btn"
+                [disabled]="nlpAnalyses.has(declaration.id!)">
+          ❌ Eliminar
+        </button>
+      </div>
+    </li>
+  </ul>
+
+  <!-- Modal para mostrar el análisis NLP -->
+  <app-analysis-npl-modal *ngIf="isModalOpen"
+    [analysis]="selectedAnalysis"
+    [isOpen]="isModalOpen"
+    (close)="closeModal()">
+  </app-analysis-npl-modal>
+</div>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PlayerService } from '../../../core/services/player.service';
 import { PlayerModel } from '../../../core/models/player.model';
+import { NotificationService } from '../../../core/services/notification.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -13,11 +14,16 @@ import { CommonModule } from '@angular/common';
 })
 export class PlayersListComponent implements OnInit {
   players: PlayerModel[] = [];
+  playerData: any;
 
-  constructor(private playerService: PlayerService, private router: Router) {}
+  constructor(
+    private playerService: PlayerService,
+    private router: Router,
+    private notificationService: NotificationService,
+  ) {}
 
   ngOnInit() {
-    this.loadPlayers();
+    this.loadPlayers()
   }
 
   loadPlayers() {
@@ -32,15 +38,23 @@ export class PlayersListComponent implements OnInit {
   }
 
   deletePlayer(id: number) {
-    if (confirm('¿Estás seguro de eliminar este jugador?')) {
-      this.playerService.deletePlayer(id).subscribe({
-        next: () => this.loadPlayers(),
-        error: (err) => console.error('Error al eliminar jugador:', err)
-      });
-    }
+    this.notificationService.showConfirmation(
+      'Eliminar Jugador',
+      '¿Estás seguro de que deseas eliminar este jugador? Esta acción no se puede deshacer.'
+    ).then((confirmed) => {
+      if (confirmed) {
+        this.playerService.deletePlayer(id).subscribe({
+          next: () => {
+            this.notificationService.showSuccess('Jugador eliminado correctamente.', 'Éxito');
+            this.loadPlayers();
+          },
+          error: () => this.notificationService.showError('Error al eliminar jugador.', 'Error')
+        });
+      }
+    });
   }
 
-  public navigateToNewPlayer() {
+  navigateToNewPlayer() {
     this.router.navigate(['/dashboard/players/new']);
   }
 }

@@ -1,46 +1,32 @@
-.analysis-container {
+.declaration-list-container {
   max-width: 900px;
   margin: auto;
   padding: 20px;
   text-align: center;
 }
 
-.add-btn {
-  background-color: #2ecc71;
-  color: white;
-  border: none;
-  padding: 12px 15px;
-  margin-bottom: 20px;
-  border-radius: 6px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s;
+.empty-state {
+  font-size: 18px;
+  color: #888;
+  margin: 20px 0;
 }
 
-.add-btn:hover {
-  background-color: #27ae60;
+.declaration-list {
+  list-style: none;
+  padding: 0;
 }
 
-.analysis-list {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.analysis-card {
+.declaration-list li {
   background: white;
   padding: 15px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: left;
   transition: transform 0.2s ease-in-out;
+  margin-bottom: 15px;
 }
 
-.analysis-card:hover {
-  transform: translateY(-3px);
-}
-
+/* 🔹 Foto del jugador */
 .player-info {
   display: flex;
   align-items: center;
@@ -66,13 +52,13 @@
   color: #777;
 }
 
-.analysis-comment {
+.declaration-text {
   font-style: italic;
   color: #444;
   margin: 8px 0;
 }
 
-.analysis-actions {
+.buttons {
   display: flex;
   justify-content: space-between;
   margin-top: 10px;
@@ -93,6 +79,14 @@ button:hover {
   background-color: #2980b9;
 }
 
+.analyze-btn {
+  background-color: #2ecc71;
+}
+
+.analyze-btn:hover {
+  background-color: #27ae60;
+}
+
 .delete-btn {
   background-color: #e74c3c;
 }
@@ -101,18 +95,7 @@ button:hover {
   background-color: #c0392b;
 }
 
-@media (max-width: 768px) {
-  .analysis-card {
-    padding: 12px;
-  }
-
-  .player-info img {
-    width: 50px;
-    height: 50px;
-  }
-
-  button {
-    padding: 8px 12px;
-    font-size: 14px;
-  }
+button:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
 }

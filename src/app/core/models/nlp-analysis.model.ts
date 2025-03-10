@@ -1,13 +1,13 @@
 export interface NlpAnalysisModel {
   id?: number;
-  analysis_id: number;
-  emocion_detectada: string; // "Felicidad", "Ansiedad", "Ira"
-  tendencia_emocional: string; // Explicación de cómo han cambiado las emociones
-  impacto_en_rendimiento: string; // "Positivo", "Negativo", "Neutro"
-  impacto_en_equipo: string; // "Positivo", "Negativo", "Neutro"
-  estado_actual_emocional: string; // "Estable", "Inestable", "En riesgo"
-  rendimiento_predicho: string; // "Alto", "Medio", "Bajo"
-  resumen_general: string; // Explicación global
-  acciones_recomendadas: string; // Sugerencias de la IA
+  declaration_id: number;  
+  emocion_detectada: string;
+  tendencia_emocional: string;
+  impacto_en_rendimiento: string;
+  impacto_en_equipo: string;
+  estado_actual_emocional: string;
+  rendimiento_predicho: string;
+  resumen_general: string;
+  acciones_recomendadas: string;
   created_at?: string;
 }

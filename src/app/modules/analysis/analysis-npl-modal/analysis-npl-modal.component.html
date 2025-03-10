@@ -2,7 +2,7 @@
   <div class="modal">
     <h3>📊 Análisis de IA</h3>
 
-    <ng-container *ngIf="analysis">
+    <ng-container *ngIf="analysis; else noAnalysis">
       <p><strong>Emoción Detectada:</strong> {{ analysis.emocion_detectada }}</p>
       <p><strong>Tendencia Emocional:</strong> {{ analysis.tendencia_emocional }}</p>
       <p><strong>Impacto en Rendimiento:</strong> {{ analysis.impacto_en_rendimiento }}</p>
@@ -11,17 +11,20 @@
       <p><strong>Rendimiento Predicho:</strong> {{ analysis.rendimiento_predicho }}</p>
       <p><strong>Resumen:</strong> {{ analysis.resumen_general }}</p>
       <p><strong>Acciones Recomendadas:</strong> {{ analysis.acciones_recomendadas }}</p>
+
+      <!-- Botones -->
+      <div class="modal-buttons">
+        <button (click)="generateReport()" class="generate-btn" [disabled]="isLoading">
+          📝 Generar Reporte
+        </button>
+        <button (click)="closeModal()" class="close-btn">❌ Cerrar</button>
+      </div>
     </ng-container>
 
-    <!-- Contenedor de botones -->
-    <div class="modal-buttons">
-      <button (click)="generateReport()" 
-              class="generate-report"
-              [disabled]="isReportGenerated || isLoading">
-        📄 {{ isReportGenerated ? 'Reporte Generado' : 'Generar Reporte' }}
-      </button>
-
+    <!-- Mensaje si no hay análisis -->
+    <ng-template #noAnalysis>
+      <p class="no-analysis">⚠️ No se encontró un análisis para esta declaración.</p>
       <button (click)="closeModal()" class="close-btn">❌ Cerrar</button>
-    </div>
+    </ng-template>
   </div>
 </div>

@@ -1,0 +1,35 @@
+<div class="declaration-form-container">
+    <h2>{{ isEditMode ? '✏️ Editar Declaración' : '➕ Agregar Declaración' }}</h2>
+  
+    <form (ngSubmit)="saveDeclaration()">
+      <label>Jugador</label>
+      <select [(ngModel)]="declaration.player_id" name="player_id" required>
+        <option *ngFor="let player of playersArray" [value]="player.id">
+          {{ player.nombre }}
+        </option>
+      </select>
+  
+      <label>Categoría</label>
+      <select [(ngModel)]="declaration.categoria_texto" name="categoria_texto" required>
+        <option value="Previo al partido">Previo al partido</option>
+        <option value="Post-partido">Post-partido</option>
+        <option value="Durante entrenamiento">Durante entrenamiento</option>
+        <option value="Lesión">Lesión</option>
+      </select>
+  
+      <label>Fuente</label>
+      <select [(ngModel)]="declaration.fuente" name="fuente" required>
+        <option value="Entrevista">Entrevista</option>
+        <option value="Redes Sociales">Redes Sociales</option>
+        <option value="Conferencia de prensa">Conferencia de prensa</option>
+        <option value="Otro">Otro</option>
+      </select>
+  
+      <label>Comentario</label>
+      <textarea [(ngModel)]="declaration.texto" name="texto" required></textarea>
+  
+      <button type="submit">{{ isEditMode ? 'Guardar Cambios' : 'Agregar Declaración' }}</button>
+      <button type="button" (click)="navigateToDeclarationList()">Cancelar</button>
+    </form>
+  </div>
+  
