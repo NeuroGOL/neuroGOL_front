@@ -1,0 +1,46 @@
+<div class="reports-by-player-container">
+    <h2>Reportes por Jugador</h2>
+  
+    <div *ngFor="let report of fullReports" class="report-card">
+      <!-- Encabezado del Jugador -->
+      <div class="player-header">
+        <img [src]="report.player.profile_picture || 'assets/default-avatar.png'" alt="Jugador" />
+        <div>
+          <h3>{{ report.player.nombre }} <span>- {{ report.player.equipo }}</span></h3>
+          <p><strong>Nacionalidad:</strong> {{ report.player.nacionalidad }}</p>
+        </div>
+      </div>
+  
+      <!-- Información de la Declaración -->
+      <div class="section">
+        <h4>Declaración</h4>
+        <p><strong>Texto:</strong> "{{ report.declaration.texto }}"</p>
+        <p><strong>Categoría:</strong> {{ report.declaration.categoria_texto }}</p>
+        <p><strong>Fuente:</strong> {{ report.declaration.fuente }}</p>
+        <p><strong>Fecha:</strong> {{ report.declaration.created_at | date:'medium' }}</p>
+      </div>
+  
+      <!-- Información del Análisis -->
+      <div class="section">
+        <h4>Análisis de IA</h4>
+        <p><strong>Emoción Detectada:</strong> {{ report.analysis.emocion_detectada }}</p>
+        <p><strong>Tendencia Emocional:</strong> {{ report.analysis.tendencia_emocional }}</p>
+        <p><strong>Impacto en Rendimiento:</strong> {{ report.analysis.impacto_en_rendimiento }}</p>
+        <p><strong>Impacto en Equipo:</strong> {{ report.analysis.impacto_en_equipo }}</p>
+        <p><strong>Estado Emocional Actual:</strong> {{ report.analysis.estado_actual_emocional }}</p>
+        <p><strong>Rendimiento Predicho:</strong> {{ report.analysis.rendimiento_predicho }}</p>
+        <p><strong>Resumen:</strong> {{ report.analysis.resumen_general }}</p>
+        <p><strong>Acciones Recomendadas:</strong> {{ report.analysis.acciones_recomendadas }}</p>
+      </div>
+  
+      <!-- Autor del Reporte -->
+      <div class="section user-info">
+        <h4>Generado por</h4>
+        <p><strong>Nombre:</strong> {{ report.user.nombre }}</p>
+        <p><strong>Email:</strong> {{ report.user.email }}</p>
+      </div>
+
+      <button (click)="exportReportAsPDF(report)" class="pdf-btn">📄 Exportar PDF</button>
+    </div>
+  </div>
+  

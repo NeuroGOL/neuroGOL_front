@@ -94,7 +94,6 @@ export class DeclarationFormComponent implements OnInit {
 
 
   navigateToDeclarationList() {
-    this.notificationService.showInfo("Redirigiendo a la lista de declaraciones.");
     this.router.navigate(['/dashboard/declarations']);
   }
 }

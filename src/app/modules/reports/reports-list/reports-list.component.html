@@ -1,17 +1,16 @@
-<h2>📊 Reportes Generados</h2>
+<div class="reports-container">
+  <h2>Jugadores con Reportes Generados</h2>
 
-<app-reports-chart></app-reports-chart>
-<app-reports-timeline></app-reports-timeline> <!-- Agregamos la nueva gráfica -->
+  <div *ngIf="playersWithReports.length === 0" class="empty-state">
+    <p>No hay reportes generados aún.</p>
+  </div>
 
-<div class="pagination-controls">
-  <button (click)="prevPage()" [disabled]="page === 1">⬅️ Anterior</button>
-  <span>Página {{ page }} de {{ totalPages }}</span>
-  <button (click)="nextPage()" [disabled]="page === totalPages">Siguiente ➡️</button>
-</div>
-
-<div class="report-card" *ngFor="let report of reports">
-  <p><strong>ID Reporte:</strong> {{ report.id }}</p>
-  <p><strong>ID Jugador:</strong> {{ report.player_id }}</p>
-  <p><strong>ID Análisis:</strong> {{ report.analysis_id }}</p>
-  <p><strong>Generado por:</strong> {{ report.generado_por }}</p>
+  <div class="players-grid" *ngIf="playersWithReports.length > 0">
+    <div class="player-card" *ngFor="let player of playersWithReports">
+      <img [src]="player.profile_picture || 'assets/default-avatar.png'" alt="Jugador" class="avatar" />
+      <h3>{{ player.nombre }}</h3>
+      <p>{{ player.equipo }}</p>
+      <button (click)="viewReportsOfPlayer(player.id)">Ver Reportes</button>
+    </div>
+  </div>
 </div>

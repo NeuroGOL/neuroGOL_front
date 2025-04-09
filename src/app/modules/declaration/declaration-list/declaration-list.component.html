@@ -1,5 +1,9 @@
 <div class="declaration-list-container">
-  <h2>📜 Declaraciones</h2>
+  <div class="declaration-header">
+    <h2>Declaraciones</h2>
+    <button class="new-declaration-btn" (click)="navigateToNewDeclaration()">+ Nueva Declaración</button>
+  </div>
+
 
   <div *ngIf="declarations.length === 0" class="empty-state">
     <p>No hay declaraciones registradas.</p>
@@ -7,40 +11,39 @@
 
   <ul class="declaration-list" *ngIf="declarations.length > 0">
     <li *ngFor="let declaration of declarations">
-      
-      <!-- 🔹 Contenedor de la información del jugador -->
       <div class="player-info">
-        <img [src]="getPlayerImage(declaration.player_id)" alt="Jugador">
+        <img [src]="getPlayerImage(declaration.player_id)" alt="Jugador" />
         <div>
           <h3>{{ getPlayerName(declaration.player_id) }}</h3>
           <p>{{ getPlayerTeam(declaration.player_id) }}</p>
         </div>
       </div>
 
-      <!-- 🔹 Contenido de la declaración -->
       <div class="declaration-content">
-        <p><strong>Categoría:</strong> {{ declaration.categoria_texto }}</p>
-        <p class="declaration-text">"{{ declaration.texto }}"</p>
+        <p class="categoria">Categoría: <span>{{ declaration.categoria_texto }}</span></p>
+        <p class="declaration-text">“{{ declaration.texto }}”</p>
       </div>
 
-      <!-- 🔹 Botones de acciones -->
       <div class="buttons">
-        <button (click)="analyzeDeclaration(declaration.id!)" class="analyze-btn">
-          🔍 {{ nlpAnalyses.has(declaration.id!) ? 'Ver Análisis' : 'Analizar' }}
+        <button class="analyze-btn" (click)="analyzeDeclaration(declaration.id!)">
+          {{ nlpAnalyses.has(declaration.id!) ? 'Ver Análisis' : 'Analizar' }}
         </button>
 
-        <button (click)="deleteDeclaration(declaration.id!)" class="delete-btn"
-                [disabled]="nlpAnalyses.has(declaration.id!)">
-          ❌ Eliminar
+        <button class="edit-btn" *ngIf="!nlpAnalyses.has(declaration.id!)"
+          (click)="navigateToEditDeclaration(declaration.id!)">
+          Editar
+        </button>
+
+        <button class="delete-btn" (click)="deleteDeclaration(declaration.id!)"
+          [disabled]="nlpAnalyses.has(declaration.id!)">
+          Eliminar
         </button>
       </div>
     </li>
   </ul>
 
-  <!-- Modal para mostrar el análisis NLP -->
-  <app-analysis-npl-modal *ngIf="isModalOpen"
-    [analysis]="selectedAnalysis"
-    [isOpen]="isModalOpen"
-    (close)="closeModal()">
+  <app-analysis-npl-modal *ngIf="isModalOpen" [analysis]="selectedAnalysis" [isOpen]="isModalOpen"
+    [declaration_id]="selectedDeclarationId" [player_id]="selectedPlayerId"
+    (reportGenerated)="onReportGenerated($event)" (close)="closeModal()">
   </app-analysis-npl-modal>
 </div>

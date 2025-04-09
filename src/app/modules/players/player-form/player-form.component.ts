@@ -1,10 +1,12 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { PlayerService } from '../../../core/services/player.service';
+import { EQUIPOS_FPC } from '../../../core/constants/equipos';
 import { PlayerModel } from '../../../core/models/player.model';
 import { NotificationService } from '../../../core/services/notification.service'; // ✅ Importar NotificationService
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { PlayerService } from '../../../core/services/player.service';
+
 
 @Component({
   selector: 'app-player-form',
@@ -14,16 +16,18 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './player-form.component.css'
 })
 export class PlayerFormComponent implements OnInit {
+
   player: PlayerModel = { id: 0, nombre: '', equipo: '', nacionalidad: '', profile_picture: '' };
   isEditMode = false;
   isLoading = false; // ✅ Estado para deshabilitar el botón mientras guarda
+  equipos = EQUIPOS_FPC
 
   constructor(
     private playerService: PlayerService,
     private notificationService: NotificationService, // ✅ Inyectar NotificationService
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     const id = Number(this.route.snapshot.paramMap.get('id'));
@@ -75,6 +79,14 @@ export class PlayerFormComponent implements OnInit {
       this.notificationService.showError("Error al guardar el jugador.");
     }
   }
+
+  updatePreview() {
+  }
+
+  imageLoadError() {
+    this.player.profile_picture = 'assets/default-avatar.png';
+  }
+
 
   public navigateToPlayers() {
     this.router.navigate(['/dashboard/players']);

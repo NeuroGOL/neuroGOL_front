@@ -1,89 +1,130 @@
 .players-container {
-  max-width: 800px;
+  max-width: 1200px;
   margin: auto;
-  padding: 20px;
-  text-align: center;
+  padding: 40px 20px;
 }
 
-.players-container h2 {
-  font-size: 24px;
-  margin-bottom: 15px;
+.players-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
-button {
-  background-color: #3498db;
+.players-header h2 {
+  font-size: 28px;
+  color: var(--accent);
+}
+
+.add-button {
+  background-color: var(--green);
   color: white;
   border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
+  padding: 10px 18px;
+  border-radius: var(--radius);
+  font-weight: 600;
   cursor: pointer;
-  font-size: 16px;
-  margin-bottom: 15px;
-  transition: background 0.3s;
-}
-
-button:hover {
-  background-color: #2980b9;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 15px;
-}
-
-th, td {
-  padding: 12px;
-  text-align: center;
-  border-bottom: 1px solid #ddd;
-}
-
-th {
-  background-color: #f2f2f2;
-}
-
-td img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-td button {
-  margin: 5px;
-  padding: 8px 12px;
   font-size: 14px;
 }
 
-td button:first-child {
-  background-color: #f1c40f;
+.add-button:hover {
+  background-color: #1ed760;
 }
 
-td button:first-child:hover {
+.search-bar {
+  width: 100%;
+  padding: 12px 16px;
+  margin: 20px 0 30px;
+  border-radius: var(--radius);
+  border: none;
+  background-color: #1b1b1b;
+  color: white;
+  font-size: 15px;
+}
+
+.players-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 24px;
+}
+
+.player-card {
+  background-color: #1c1c1c;
+  border-radius: var(--radius);
+  padding: 20px;
+  color: var(--light);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.player-card:hover {
+  transform: translateY(-4px);
+}
+
+.profile-section {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.avatar-large {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent);
+}
+
+.info h3 {
+  margin: 0;
+  font-size: 17px;
+  color: white;
+}
+
+.equipo {
+  font-size: 14px;
+  color: #bbb;
+}
+
+.icon {
+  margin-right: 6px;
+}
+
+
+.card-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.card-actions button {
+  border: none;
+  padding: 8px 14px;
+  border-radius: var(--radius);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.edit {
+  background-color: #f1c40f;
+  color: #121212;
+}
+
+.edit:hover {
   background-color: #d4ac0d;
 }
 
-td button:last-child {
+.delete {
   background-color: #e74c3c;
+  color: white;
 }
 
-td button:last-child:hover {
+.delete:hover {
   background-color: #c0392b;
-}
-
-/* 📌 Responsivo para pantallas pequeñas */
-@media (max-width: 600px) {
-  table {
-    font-size: 14px;
-  }
-
-  td img {
-    width: 40px;
-    height: 40px;
-  }
-
-  td button {
-    padding: 6px 10px;
-    font-size: 12px;
-  }
 }

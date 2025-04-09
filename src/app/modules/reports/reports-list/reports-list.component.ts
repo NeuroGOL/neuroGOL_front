@@ -1,56 +1,47 @@
-import { Component } from '@angular/core';
-import { ReportsService } from '../../../core/services/reports.service';
 import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { PlayerModel } from '../../../core/models/player.model';
 import { ReportModel } from '../../../core/models/report.model';
-import { ReportsChartComponent } from "../reports-chart/reports-chart.component";
-import { ReportsTimelineComponent } from "../reports-timeline/reports-timeline.component";
+import { PlayerService } from '../../../core/services/player.service';
+import { ReportsService } from '../../../core/services/reports.service';
 
 @Component({
   selector: 'app-reports-list',
   standalone: true,
-  imports: [CommonModule, ReportsChartComponent, ReportsTimelineComponent],
+  imports: [CommonModule],
   templateUrl: './reports-list.component.html',
   styleUrl: './reports-list.component.css'
 })
 export class ReportsListComponent {
-  reports: ReportModel[] = [];
-  page = 1;
-  pageSize = 5;
-  totalPages = 1;
+  playersWithReports: PlayerModel[] = [];
+  allReports: ReportModel[] = [];
 
-  constructor(private reportsService: ReportsService) {}
+  constructor(
+    private playerService: PlayerService,
+    private reportsService: ReportsService,
+    private router: Router
+  ) { }
 
-  ngOnInit() {
-    this.loadReports();
+  ngOnInit(): void {
+    this.loadPlayersWithReports();
   }
 
-  loadReports() {
+  loadPlayersWithReports() {
     this.reportsService.getReports().subscribe({
-      next: (data) => {
-        this.reports = data; // Cargar reportes directamente
-        this.totalPages = Math.ceil(this.reports.length / this.pageSize);
-        this.updatePage();
-      },
-      error: (err) => console.error('Error al obtener reportes:', err)
+      next: (reports) => {
+        this.allReports = reports;
+        this.playerService.getPlayers().subscribe({
+          next: (players) => {
+            const playerIdsWithReports = new Set(reports.map(r => r.player_id));
+            this.playersWithReports = players.filter(p => playerIdsWithReports.has(p.id));
+          }
+        });
+      }
     });
   }
 
-  updatePage() {
-    const startIndex = (this.page - 1) * this.pageSize;
-    this.reports = this.reports.slice(startIndex, startIndex + this.pageSize);
-  }
-
-  nextPage() {
-    if (this.page < this.totalPages) {
-      this.page++;
-      this.updatePage();
-    }
-  }
-
-  prevPage() {
-    if (this.page > 1) {
-      this.page--;
-      this.updatePage();
-    }
+  viewReportsOfPlayer(playerId: number) {
+    this.router.navigate(['/dashboard/reports', playerId]);
   }
 }

@@ -1,1 +1,48 @@
-<p>sidebar works!</p>
+<div class="dashboard-layout" [class.collapsed]="sidebarCollapsed">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <!-- Botón toggle dentro del sidebar -->
+    <button class="toggle-button" (click)="toggleSidebar()">☰</button>
+
+    <!-- Logo (cuando sidebar NO está colapsado) -->
+    <a *ngIf="!sidebarCollapsed" routerLink="/dashboard" class="logo-link">
+      <img src="/assets/neurogol.png" alt="NeuroGol Logo" class="logo-img" />
+    </a>
+
+
+    <nav class="nav-links">
+      <a routerLink="/dashboard/players" routerLinkActive="active">
+        <span class="icon">⚽</span>
+        <span class="text" *ngIf="!sidebarCollapsed">Jugadores</span>
+      </a>
+      <a routerLink="/dashboard/declarations" routerLinkActive="active">
+        <span class="icon">📝</span>
+        <span class="text" *ngIf="!sidebarCollapsed">Declaraciones</span>
+      </a>
+      <a routerLink="/dashboard/reports" routerLinkActive="active">
+        <span class="icon">📊</span>
+        <span class="text" *ngIf="!sidebarCollapsed">Reportes</span>
+      </a>
+    </nav>
+
+    <!-- Usuario logueado -->
+    <div class="user-info" *ngIf="user && !sidebarCollapsed">
+      <img [src]="user.profile_picture || 'assets/default-avatar.png'" alt="User" class="user-avatar" />
+      <div>
+        <p class="user-name">{{ user.nombre }}</p>
+        <p class="user-email">{{ user.email }}</p>
+      </div>
+    </div>
+
+
+    <button (click)="logout()" class="logout-button">
+      <span class="icon">🚪</span>
+      <span class="text" *ngIf="!sidebarCollapsed">Cerrar Sesión</span>
+    </button>
+  </aside>
+
+  <!-- Contenido principal -->
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+</div>

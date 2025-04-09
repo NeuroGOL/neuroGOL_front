@@ -1,30 +1,35 @@
 <div *ngIf="isOpen" class="modal-overlay">
   <div class="modal">
-    <h3>📊 Análisis de IA</h3>
+    <h3>Análisis de IA</h3>
 
     <ng-container *ngIf="analysis; else noAnalysis">
-      <p><strong>Emoción Detectada:</strong> {{ analysis.emocion_detectada }}</p>
-      <p><strong>Tendencia Emocional:</strong> {{ analysis.tendencia_emocional }}</p>
-      <p><strong>Impacto en Rendimiento:</strong> {{ analysis.impacto_en_rendimiento }}</p>
-      <p><strong>Impacto en Equipo:</strong> {{ analysis.impacto_en_equipo }}</p>
-      <p><strong>Estado Emocional Actual:</strong> {{ analysis.estado_actual_emocional }}</p>
-      <p><strong>Rendimiento Predicho:</strong> {{ analysis.rendimiento_predicho }}</p>
-      <p><strong>Resumen:</strong> {{ analysis.resumen_general }}</p>
-      <p><strong>Acciones Recomendadas:</strong> {{ analysis.acciones_recomendadas }}</p>
+      <div class="analysis-group">
+        <p><strong>Emoción Detectada:</strong> {{ analysis.emocion_detectada }}</p>
+        <p><strong>Tendencia Emocional:</strong> {{ analysis.tendencia_emocional }}</p>
+        <p><strong>Impacto en Rendimiento:</strong> {{ analysis.impacto_en_rendimiento }}</p>
+        <p><strong>Impacto en Equipo:</strong> {{ analysis.impacto_en_equipo }}</p>
+        <p><strong>Estado Emocional Actual:</strong> {{ analysis.estado_actual_emocional }}</p>
+        <p><strong>Rendimiento Predicho:</strong> {{ analysis.rendimiento_predicho }}</p>
+        <p><strong>Resumen:</strong> {{ analysis.resumen_general }}</p>
+        <p><strong>Acciones Recomendadas:</strong> {{ analysis.acciones_recomendadas }}</p>
+      </div>
 
-      <!-- Botones -->
       <div class="modal-buttons">
-        <button (click)="generateReport()" class="generate-btn" [disabled]="isLoading">
-          📝 Generar Reporte
+        <button (click)="generateReport()" class="generate-btn" [class.disabled-report]="hasReport"
+          [disabled]="isLoading || hasReport">
+          {{ hasReport ? 'Reporte ya generado' : 'Generar Reporte' }}
         </button>
-        <button (click)="closeModal()" class="close-btn">❌ Cerrar</button>
+
+
+        <button (click)="closeModal()" class="close-btn">Cerrar</button>
       </div>
     </ng-container>
 
-    <!-- Mensaje si no hay análisis -->
     <ng-template #noAnalysis>
-      <p class="no-analysis">⚠️ No se encontró un análisis para esta declaración.</p>
-      <button (click)="closeModal()" class="close-btn">❌ Cerrar</button>
+      <p class="no-analysis">No se encontró un análisis para esta declaración.</p>
+      <div class="modal-buttons">
+        <button (click)="closeModal()" class="close-btn">Cerrar</button>
+      </div>
     </ng-template>
   </div>
 </div>

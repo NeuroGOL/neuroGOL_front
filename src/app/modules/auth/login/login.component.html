@@ -1,16 +1,17 @@
-<div class="login-container">
-  <h2>🔐 Iniciar Sesión</h2>
-  <form (submit)="login()">
-    <label>Email</label>
-    <input type="email" [(ngModel)]="credentials.email" name="email" required>
+<div class="login-wrapper">
+  <form class="login-form" (submit)="login()" autocomplete="on">
+    <h2>Inicia sesión</h2>
 
-    <label>Contraseña</label>
-    <input type="password" [(ngModel)]="credentials.contrasena" name="contrasena" required> 
-    <!-- 🔹 Cambiar "password" por "contrasena" -->
+    <input type="email" placeholder="Correo electrónico" [(ngModel)]="credentials.email" name="email" autocomplete="email" required />
 
-    <button type="submit" [disabled]="isLoading">🔓 Acceder</button>
+    <input type="password" placeholder="Contraseña" [(ngModel)]="credentials.contrasena" name="contrasena" autocomplete="current-password" required />
 
-    <p>¿No tienes cuenta? <a routerLink="/register">Regístrate</a></p>
+    <button type="submit" [disabled]="isLoading">Acceder</button>
+
+    <p class="alt-link">
+      ¿No tienes cuenta?
+      <a routerLink="/register">Regístrate</a>
+    </p>
 
     <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
   </form>

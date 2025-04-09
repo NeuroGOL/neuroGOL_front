@@ -1,14 +1,26 @@
-<div class="dashboard-container">
-  <header class="header">
-    <h1>📊 Dashboard</h1>
-    <button (click)="logout()">🚪 Cerrar Sesión</button>
-  </header>
+<div class="dashboard-page">
+  <section class="intro">
+    <h1>Bienvenido a NeuroGOL</h1>
+    <p>
+      Esta plataforma fue diseñada para analizar cómo el estado emocional influye en el rendimiento de los jugadores del Fútbol Profesional Colombiano (FPC).
+      Gestiona jugadores, registra declaraciones y genera reportes respaldados por análisis de IA.
+    </p>
+  </section>
 
-  <div class="grid">
-    <a routerLink="/dashboard/players" class="card">⚽ Gestionar Jugadores</a>    
-    <a routerLink="/dashboard/declarations" class="card">📝 Declaraciones</a>
-    <a routerLink="/dashboard/reports" class="card">📊 Reportes</a>
-  </div>
+  <section class="cards">
+    <a routerLink="/dashboard/players" class="card">
+      <h2>⚽ Jugadores</h2>
+      <p>Administra el perfil emocional y deportivo de cada jugador.</p>
+    </a>
 
-  <router-outlet></router-outlet>
+    <a routerLink="/dashboard/declarations" class="card">
+      <h2>📝 Declaraciones</h2>
+      <p>Registra opiniones y emociones antes y después de cada partido.</p>
+    </a>
+
+    <a routerLink="/dashboard/reports" class="card">
+      <h2>📊 Reportes</h2>
+      <p>Visualiza el impacto emocional en el desempeño con IA.</p>
+    </a>
+  </section>
 </div>

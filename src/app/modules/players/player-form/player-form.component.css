@@ -1,87 +1,113 @@
 .player-form-container {
   max-width: 500px;
-  margin: 40px auto;
-  padding: 20px;
-  background: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  text-align: center;
+  margin: 60px auto;
+  padding: 30px;
+  background: #1c1c1c;
+  border-radius: var(--radius);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.35);
+  color: var(--light);
 }
 
 .player-form-container h2 {
-  font-size: 22px;
-  margin-bottom: 15px;
-  color: #333;
+  font-size: 26px;
+  text-align: center;
+  color: var(--accent);
+  margin-bottom: 30px;
 }
 
 form {
   display: flex;
   flex-direction: column;
+  gap: 18px;
 }
 
 label {
-  font-weight: bold;
-  text-align: left;
-  margin-bottom: 5px;
-  display: block;
-  color: #444;
+  font-size: 14px;
+  font-weight: 600;
+  color: #aaa;
 }
 
-input {
+/* 🔹 Estilo unificado para inputs y select */
+input,
+select {
   width: 100%;
-  padding: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
-  transition: border 0.3s ease-in-out;
+  padding: 10px 12px;
+  background-color: #121212;
+  color: var(--light);
+  border: 1px solid #333;
+  border-radius: var(--radius);
+  font-size: 15px;
+  transition: border-color 0.3s ease;
 }
 
-input:focus {
-  border-color: #3498db;
+input:focus,
+select:focus {
+  border-color: var(--green);
   outline: none;
-  box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+}
+
+/* 🔹 Opciones del select */
+select option {
+  background-color: #1c1c1c;
+  color: var(--light);
+}
+
+/* 🔹 Acciones del formulario */
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  gap: 12px;
 }
 
 button {
-  width: 100%;
+  flex: 1;
   padding: 12px;
+  font-size: 15px;
   border: none;
-  border-radius: 5px;
-  font-size: 16px;
+  border-radius: var(--radius);
+  font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s ease-in-out;
-  margin-top: 10px;
+  transition: background 0.3s ease;
 }
 
-/* Botón principal */
-button[type="submit"] {
-  background-color: #2ecc71;
+.btn-confirm {
+  background-color: var(--green);
   color: white;
 }
 
-button[type="submit"]:hover {
-  background-color: #27ae60;
+.btn-confirm:hover {
+  background-color: #1ed760;
 }
 
-/* Botón de cancelar */
-button[type="button"] {
+.btn-cancel {
   background-color: #e74c3c;
   color: white;
 }
 
-button[type="button"]:hover {
+.btn-cancel:hover {
   background-color: #c0392b;
 }
 
-/* 📌 Responsivo */
+/* 🔹 Vista previa de imagen */
+.preview {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.preview img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  background-color: #000;
+}
+
+/* 🔹 Responsive */
 @media (max-width: 600px) {
   .player-form-container {
-    max-width: 90%;
-    padding: 15px;
-  }
-
-  input {
-    font-size: 14px;
+    padding: 20px;
   }
 
   button {

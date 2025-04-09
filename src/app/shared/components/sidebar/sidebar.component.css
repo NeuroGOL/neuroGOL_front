@@ -1,0 +1,170 @@
+.dashboard-layout {
+  display: flex;
+  height: 100vh;
+  background-color: #f0f2f5;
+  font-family: var(--font);
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background-color: #1e1e1e;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-shadow: 4px 0 12px rgba(0, 0, 0, 0.2);
+  transition: width 0.3s ease;
+  position: relative;
+}
+
+/* Botón toggle dentro del sidebar */
+.toggle-button {
+  background: transparent;
+  color: white;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  margin-bottom: 30px;
+  align-self: flex-end;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  color: white !important;
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex-grow: 1;
+}
+
+.nav-links a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  padding: 10px 15px;
+  border-radius: 8px;
+  transition: background 0.3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  background-color: #2ecc71;
+}
+
+.icon {
+  font-size: 18px;
+  width: 24px;
+  text-align: center;
+}
+
+.text {
+  white-space: nowrap;
+}
+
+.logout-button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: transparent;
+  border: none;
+  color: #e74c3c;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 10px 15px;
+  transition: background 0.3s;
+}
+
+.logout-button:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Contenido principal */
+.main-content {
+  flex-grow: 1;
+  padding: 40px;
+  overflow-y: auto;
+  transition: margin-left 0.3s;
+  background-color: var(--dark);
+}
+
+/* Sidebar colapsado */
+.dashboard-layout.collapsed .sidebar {
+  width: 70px;
+  padding: 20px 10px;
+  align-items: center;
+}
+
+.dashboard-layout.collapsed .toggle-button {
+  align-self: center;
+  margin-bottom: 20px;
+}
+
+.dashboard-layout.collapsed .logo {
+  display: none;
+}
+
+.dashboard-layout.collapsed .text {
+  display: none;
+}
+
+.dashboard-layout.collapsed .nav-links a,
+.dashboard-layout.collapsed .logout-button {
+  justify-content: center;
+  padding: 10px;
+}
+
+.logo-link {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.logo-img {
+  max-width: 100%;
+  max-height: 60px;
+  object-fit: contain;
+  filter: brightness(0) invert(1); /* Opcional: hace que se vea bien en fondo oscuro */
+}
+
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius);
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white;
+}
+
+.user-name {
+  font-weight: bold;
+  color: #fff;
+  margin: 0;
+}
+
+.user-email {
+  font-size: 12px;
+  color: #ccc;
+  margin: 0;
+}

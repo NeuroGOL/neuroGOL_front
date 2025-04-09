@@ -1,20 +1,33 @@
 <div class="player-form-container">
-  <h2>{{ isEditMode ? '✏️ Editar Jugador' : '➕ Agregar Jugador' }}</h2>
+  <h2>{{ isEditMode ? 'Editar Jugador' : 'Agregar Jugador' }}</h2>
 
   <form (ngSubmit)="savePlayer()">
-    <label>Nombre</label>
-    <input type="text" [(ngModel)]="player.nombre" name="nombre" required>
+    <label for="nombre">Nombre</label>
+    <input type="text" id="nombre" [(ngModel)]="player.nombre" name="nombre" required />
 
-    <label>Equipo</label>
-    <input type="text" [(ngModel)]="player.equipo" name="equipo" required>
+    <label for="equipo">Equipo</label>
+    <select id="equipo" [(ngModel)]="player.equipo" name="equipo" required>
+      <option value="" disabled selected>Seleccione un equipo</option>
+      <option *ngFor="let equipo of equipos" [value]="equipo">{{ equipo }}</option>
+    </select>
 
-    <label>Nacionalidad</label>
-    <input type="text" [(ngModel)]="player.nacionalidad" name="nacionalidad" required>
 
-    <label>Foto de Perfil (URL)</label>
-    <input type="text" [(ngModel)]="player.profile_picture" name="profile_picture">
+    <label for="nacionalidad">Nacionalidad</label>
+    <input type="text" id="nacionalidad" [(ngModel)]="player.nacionalidad" name="nacionalidad" required />
 
-    <button type="submit">{{ isEditMode ? 'Guardar Cambios' : 'Agregar Jugador' }}</button>
-    <button type="button" (click)="navigateToPlayers()">Cancelar</button>
+    <label for="profile_picture">Foto de Perfil (URL)</label>
+    <input type="text" id="profile_picture" [(ngModel)]="player.profile_picture" name="profile_picture"
+      (input)="updatePreview()" />
+
+    <div class="preview" *ngIf="player.profile_picture">
+      <img [src]="player.profile_picture" alt="Vista previa" (error)="imageLoadError()" />
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn-confirm">
+        {{ isEditMode ? 'Guardar Cambios' : 'Agregar Jugador' }}
+      </button>
+      <button type="button" class="btn-cancel" (click)="navigateToPlayers()">Cancelar</button>
+    </div>
   </form>
 </div>

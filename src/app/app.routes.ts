@@ -11,6 +11,8 @@ import { AuthRedirectGuard } from './core/guards/auth-redirect.guard';
 import { AuthGuard } from './core/guards/auth.guard';
 import { DeclarationFormComponent } from './modules/declaration/declaration-form/declaration-form.component';
 import { DeclarationListComponent } from './modules/declaration/declaration-list/declaration-list.component';
+import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
+import { ReportsByPlayerComponent } from './modules/reports/reports-by-player/reports-by-player.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -21,10 +23,10 @@ export const routes: Routes = [
 
   {
     path: 'dashboard',
-    component: DashboardComponent,
+    component: SidebarComponent,
     canActivate: [AuthGuard], // 🔒 Protegido: solo usuarios autenticados
     children: [
-      { path: '', redirectTo: 'players', pathMatch: 'full' },
+      { path: '', component: DashboardComponent, pathMatch: 'full' },
       { path: 'players', component: PlayersListComponent },
       { path: 'players/new', component: PlayerFormComponent },
       { path: 'players/edit/:id', component: PlayerFormComponent },
@@ -34,7 +36,8 @@ export const routes: Routes = [
       { path: 'declaration/edit/:id', component: DeclarationFormComponent },
 
 
-      { path: 'reports', component: ReportsListComponent }
+      { path: 'reports', component: ReportsListComponent },
+      { path: 'reports/:id', component: ReportsByPlayerComponent },
     ]
   },
 

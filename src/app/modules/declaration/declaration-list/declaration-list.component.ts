@@ -26,6 +26,9 @@ export class DeclarationListComponent implements OnInit {
   nlpAnalyses: Map<number, NlpAnalysisModel> = new Map();
   isLoading = false;
   selectedAnalysis?: NlpAnalysisModel;
+  selectedDeclaration?: DeclarationModel;
+  selectedPlayerId?: number;
+  selectedDeclarationId?: number;
   isModalOpen = false;
 
   constructor(
@@ -92,19 +95,26 @@ export class DeclarationListComponent implements OnInit {
 
   /** 🔹 Analizar declaración con IA */
   analyzeDeclaration(declarationId: number) {
-
     console.log('🔍 Analizando declaración:', declarationId);
-    
-
+  
+    const declaration = this.declarations.find(d => d.id === declarationId);
+    if (!declaration) {
+      this.notificationService.showError('No se encontró la declaración.');
+      return;
+    }
+  
+    this.selectedDeclarationId = declaration.id;
+    this.selectedPlayerId = declaration.player_id;
+  
     if (this.nlpAnalyses.has(declarationId)) {
       this.selectedAnalysis = this.nlpAnalyses.get(declarationId)!;
       this.isModalOpen = true;
       return;
     }
-
+  
     this.isLoading = true;
     this.notificationService.showInfo('Generando análisis...', 'Por favor, espera');
-
+  
     this.nlpAnalysisService.generateNlpAnalysis(declarationId).subscribe({
       next: (newAnalysis) => {
         this.nlpAnalyses.set(declarationId, newAnalysis);
@@ -120,6 +130,7 @@ export class DeclarationListComponent implements OnInit {
       }
     });
   }
+  
 
   /** 🔹 Eliminar una declaración (solo si no tiene análisis asociado) */
   deleteDeclaration(declarationId: number) {
@@ -146,6 +157,11 @@ export class DeclarationListComponent implements OnInit {
       }
     });
   }
+  
+  onReportGenerated(reportId: number) {
+    console.log('📄 Reporte generado con ID:', reportId);
+    this.notificationService.showSuccess('Reporte generado y almacenado con éxito.');
+  }
 
   /** 🔹 Obtener nombre del jugador */
   getPlayerName(playerId: number): string {
@@ -170,6 +186,10 @@ export class DeclarationListComponent implements OnInit {
   /** 🔹 Navegar para agregar una nueva declaración */
   navigateToNewDeclaration() {
     this.router.navigate(['/dashboard/declaration/new']);
+  }
+
+  navigateToEditDeclaration(declarationId: number) {
+    this.router.navigate(['/dashboard/declaration/edit', declarationId]);
   }
 
   /** 🔹 Cerrar modal */
