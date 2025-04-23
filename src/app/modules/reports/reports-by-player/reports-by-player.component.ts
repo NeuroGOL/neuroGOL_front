@@ -27,6 +27,7 @@ export class ReportsByPlayerComponent implements OnInit {
     analysis: NlpAnalysisModel;
     declaration: DeclarationModel;
     user: UserModel;
+    expanded: boolean;
   }> = [];
 
   playerId!: number;
@@ -38,7 +39,7 @@ export class ReportsByPlayerComponent implements OnInit {
     private declarationService: DeclarationService,
     private nlpService: NlpAnalysisService,
     private userService: UserService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.playerId = Number(this.route.snapshot.paramMap.get('id'));
@@ -60,14 +61,16 @@ export class ReportsByPlayerComponent implements OnInit {
     const userMap = new Map((users ?? []).map(u => [u.id, u]));
 
     this.fullReports = (reports ?? [])
-      .filter(r => r.player_id === this.playerId) // ✅ Solo los del jugador actual
+      .filter(r => r.player_id === this.playerId)
       .map(report => ({
         report,
         player: playerMap.get(report.player_id)!,
         declaration: declMap.get(report.declaration_id)!,
         analysis: analysisMap.get(report.nlp_analysis_id)!,
-        user: userMap.get(report.generado_por)!
+        user: userMap.get(report.generado_por)!,
+        expanded: false // 👈
       }));
+
   }
 
   exportReportAsPDF(reportData: any) {

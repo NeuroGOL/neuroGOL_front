@@ -78,3 +78,19 @@
 .pdf-btn:hover {
   background-color: #169f48;
 }
+
+.arrow {
+  margin-left: auto;
+  font-size: 24px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.arrow .rotate {
+  transform: rotate(90deg);
+}
+
+.resumen-declaracion {
+  background-color: #222;
+  border-left: 4px solid var(--green);
+}
