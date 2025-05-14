@@ -12,11 +12,25 @@ export class NlpAnalysisService {
 
   constructor(private http: HttpClient) {}
 
+  /** 🔹 Obtener todos los análisis NLP */
   getAllNlpAnalyses(): Observable<NlpAnalysisModel[]> {
     return this.http.get<NlpAnalysisModel[]>(this.apiUrl);
   }
 
-  generateNlpAnalysis(playerId: number): Observable<NlpAnalysisModel> {
-    return this.http.post<NlpAnalysisModel>(`${this.apiUrl}`, { analysis_id: playerId });
+  /** 🔹 Obtener análisis NLP por declaración */
+  getAnalysisByDeclaration(declarationId: number): Observable<NlpAnalysisModel | null> {
+    return this.http.get<NlpAnalysisModel | null>(`${this.apiUrl}/declaration/${declarationId}`);
+  }
+
+  /** 🔹 Generar un análisis NLP para una declaración */
+  generateNlpAnalysis(declarationId: number): Observable<NlpAnalysisModel> {
+    console.log('📤 Enviando datos al backend:', { declaration_id: declarationId });
+  
+    return this.http.post<NlpAnalysisModel>(`${this.apiUrl}`, { declaration_id: declarationId });
+  }
+  
+  /** 🔹 Eliminar un análisis NLP */
+  deleteNlpAnalysis(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }

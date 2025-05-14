@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PlayerAnalysisComponent } from './player-analysis.component';
+import { DeclarationFormComponent } from './declaration-form.component';
 
-describe('PlayerAnalysisComponent', () => {
-  let component: PlayerAnalysisComponent;
-  let fixture: ComponentFixture<PlayerAnalysisComponent>;
+describe('DeclarationFormComponent', () => {
+  let component: DeclarationFormComponent;
+  let fixture: ComponentFixture<DeclarationFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PlayerAnalysisComponent]
+      imports: [DeclarationFormComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(PlayerAnalysisComponent);
+    fixture = TestBed.createComponent(DeclarationFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

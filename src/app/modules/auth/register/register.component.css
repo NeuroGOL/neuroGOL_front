@@ -1,90 +1,76 @@
-/* 📌 Contenedor principal */
-.auth-container {
+.auth-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: var(--dark);
+  padding: 20px;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
   max-width: 400px;
-  margin: 50px auto;
-  padding: 25px;
-  background: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  background-color: #1e1e1e;
+  border-radius: var(--radius);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.4);
+}
+
+.auth-form h2 {
+  color: var(--light);
+  font-size: 28px;
   text-align: center;
 }
 
-/* 📌 Título */
-.auth-container h2 {
-  font-size: 24px;
-  color: #333;
-  margin-bottom: 20px;
+.auth-form input {
+  padding: 14px;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 16px;
+  background-color: #2c2c2c;
+  color: white;
 }
 
-/* 📌 Formulario */
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+.auth-form input:focus {
+  outline: 2px solid var(--green);
+  background-color: #2f2f2f;
 }
 
-/* 📌 Etiquetas */
-label {
-  font-size: 14px;
-  font-weight: bold;
-  color: #444;
-  text-align: left;
-  display: block;
-}
-
-/* 📌 Campos de entrada */
-input {
-  width: 100%;
-  padding: 10px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  transition: border 0.3s ease-in-out;
-}
-
-input:focus {
-  border-color: #2ecc71;
-  outline: none;
-}
-
-/* 📌 Botón de registro */
-button {
-  width: 100%;
-  padding: 12px;
+.auth-form button {
+  padding: 14px;
+  border: none;
+  border-radius: var(--radius);
+  background-color: var(--green);
+  color: white;
   font-size: 16px;
   font-weight: bold;
-  color: white;
-  background: #2ecc71;
-  border: none;
-  border-radius: 5px;
   cursor: pointer;
-  transition: background 0.3s ease-in-out;
+  transition: background 0.3s ease;
 }
 
-button:hover {
-  background: #27ae60;
+.auth-form button:hover {
+  background-color: #17a74a;
 }
 
-/* 📌 Enlace para iniciar sesión */
-p {
+.auth-form button:disabled {
+  background-color: #555;
+  cursor: not-allowed;
+}
+
+.alt-link {
   font-size: 14px;
-  margin-top: 15px;
+  text-align: center;
+  color: #ccc;
 }
 
-p a {
-  color: #3498db;
-  font-weight: bold;
+.alt-link a {
+  color: var(--green);
   text-decoration: none;
-  transition: color 0.3s ease-in-out;
 }
 
-p a:hover {
-  color: #2980b9;
-}
-
-/* 📌 Diseño responsivo */
-@media (max-width: 480px) {
-  .auth-container {
-    width: 90%;
-  }
+.alt-link a:hover {
+  text-decoration: underline;
 }

@@ -1,26 +1,30 @@
 <div class="players-container">
-  <h2>⚽ Lista de Jugadores</h2>
-  <button (click)="navigateToNewPlayer()">➕ Agregar Jugador</button>
+  <div class="players-header">
+    <h2>Jugadores</h2>
+    <button class="add-button" (click)="navigateToNewPlayer()">+ Agregar Jugador</button>
+  </div>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Foto</th>
-        <th>Nombre</th>
-        <th>Equipo</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let player of players">
-        <td><img [src]="player.profile_picture || 'assets/default-avatar.png'" alt="Foto"></td>
-        <td>{{ player.nombre }}</td>
-        <td>{{ player.equipo }}</td>
-        <td>
-          <button (click)="editPlayer(player.id)">✏️ Editar</button>
-          <button (click)="deletePlayer(player.id)">🗑️ Eliminar</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <input
+    type="text"
+    class="search-bar"
+    placeholder="Buscar por nombre o equipo..."
+    [(ngModel)]="filter"
+    (input)="applyFilter()"
+  />
+
+  <div class="players-grid">
+    <div class="player-card" *ngFor="let player of filteredPlayers">
+      <div class="profile-section">
+        <img [src]="player.profile_picture || 'assets/default-avatar.png'" class="avatar-large" />
+        <div class="info">
+          <h3>{{ player.nombre }}</h3>
+          <p class="equipo"><span class="icon">📍</span> {{ player.equipo }}</p>
+        </div>
+      </div>
+      <div class="card-actions">
+        <button class="edit" (click)="editPlayer(player.id)">Editar</button>
+        <button class="delete" (click)="deletePlayer(player.id)">Eliminar</button>
+      </div>
+    </div>
+  </div>
 </div>

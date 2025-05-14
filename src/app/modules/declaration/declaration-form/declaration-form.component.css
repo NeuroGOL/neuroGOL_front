@@ -1,14 +1,14 @@
-.player-form-container {
-  max-width: 500px;
+.declaration-form-container {
+  max-width: 600px;
   margin: 60px auto;
   padding: 30px;
-  background: #1c1c1c;
+  background-color: #1e1e1e;
   border-radius: var(--radius);
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.35);
   color: var(--light);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
 }
 
-.player-form-container h2 {
+.declaration-form-container h2 {
   font-size: 26px;
   text-align: center;
   color: var(--accent);
@@ -24,35 +24,33 @@ form {
 label {
   font-size: 14px;
   font-weight: 600;
-  color: #aaa;
+  color: #ccc;
 }
 
-/* 🔹 Estilo unificado para inputs y select */
 input,
-select {
-  width: 100%;
+select,
+textarea {
   padding: 10px 12px;
   background-color: #121212;
   color: var(--light);
   border: 1px solid #333;
   border-radius: var(--radius);
   font-size: 15px;
-  transition: border-color 0.3s ease;
+  transition: border 0.3s;
 }
 
 input:focus,
-select:focus {
-  border-color: var(--green);
+select:focus,
+textarea:focus {
+  border-color: var(--accent);
   outline: none;
 }
 
-/* 🔹 Opciones del select */
-select option {
-  background-color: #1c1c1c;
-  color: var(--light);
+textarea {
+  resize: vertical;
+  min-height: 100px;
 }
 
-/* 🔹 Acciones del formulario */
 .form-actions {
   display: flex;
   justify-content: space-between;
@@ -68,7 +66,7 @@ button {
   border-radius: var(--radius);
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: background 0.3s;
 }
 
 .btn-confirm {
@@ -89,29 +87,32 @@ button {
   background-color: #c0392b;
 }
 
-/* 🔹 Vista previa de imagen */
-.preview {
-  margin-top: 15px;
-  text-align: center;
-}
-
-.preview img {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 2px solid var(--accent);
-  background-color: #000;
-}
-
-/* 🔹 Responsive */
 @media (max-width: 600px) {
-  .player-form-container {
+  .declaration-form-container {
     padding: 20px;
+    margin: 40px 16px;
+  }
+
+  .declaration-form-container h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+
+  input,
+  select,
+  textarea {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+
+  .form-actions {
+    flex-direction: column;
+    gap: 10px;
   }
 
   button {
     font-size: 14px;
     padding: 10px;
+    width: 100%;
   }
 }
