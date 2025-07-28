@@ -1,49 +1,63 @@
-<div class="reports-by-player-container">
-  <h2>Reportes por Jugador</h2>
+<div class="container my-4 reports-by-player-container">
+  <h2 class="fw-bold text-primary mb-4">Reportes por Jugador</h2>
 
-  <div *ngFor="let report of fullReports" class="report-card">
-    
-    <!-- Encabezado del Jugador + Flechita -->
-    <div class="player-header" (click)="report.expanded = !report.expanded">
-      <img [src]="report.player.profile_picture || 'assets/default-avatar.png'" alt="Jugador" />
-      <div>
-        <h3>{{ report.player.nombre }} <span>- {{ report.player.equipo }}</span></h3>
-        <p><strong>Nacionalidad:</strong> {{ report.player.nacionalidad }}</p>
-      </div>
-      <div class="arrow">
-        <span [ngClass]="{'rotate': report.expanded}">▶</span>
-      </div>
-    </div>
+  <div *ngFor="let report of fullReports" class="card shadow-sm border-0 mb-4">
+    <div class="card-body">
 
-    <!-- SIEMPRE visible: Declaración -->
-    <div class="section resumen-declaracion">
-      <h4>📝 Declaración</h4>
-      <p><strong>Texto:</strong> "{{ report.declaration.texto }}"</p>
-      <p><strong>Categoría:</strong> {{ report.declaration.categoria_texto }}</p>
-      <p><strong>Fecha:</strong> {{ report.declaration.created_at | date:'medium' }}</p>
-    </div>
-
-    <!-- Solo visible si está expandido -->
-    <div *ngIf="report.expanded">
-      <div class="section">
-        <h4>Análisis de IA</h4>
-        <p><strong>Emoción Detectada:</strong> {{ report.analysis.emocion_detectada }}</p>
-        <p><strong>Tendencia Emocional:</strong> {{ report.analysis.tendencia_emocional }}</p>
-        <p><strong>Impacto en Rendimiento:</strong> {{ report.analysis.impacto_en_rendimiento }}</p>
-        <p><strong>Impacto en Equipo:</strong> {{ report.analysis.impacto_en_equipo }}</p>
-        <p><strong>Estado Emocional Actual:</strong> {{ report.analysis.estado_actual_emocional }}</p>
-        <p><strong>Rendimiento Predicho:</strong> {{ report.analysis.rendimiento_predicho }}</p>
-        <p><strong>Resumen:</strong> {{ report.analysis.resumen_general }}</p>
-        <p><strong>Acciones Recomendadas:</strong> {{ report.analysis.acciones_recomendadas }}</p>
+      <!-- Encabezado: jugador + flechita -->
+      <div 
+        class="d-flex align-items-center justify-content-between mb-3 cursor-pointer"
+        (click)="report.expanded = !report.expanded"
+      >
+        <div class="d-flex align-items-center">
+          <img 
+            [src]="report.player.profile_picture || 'assets/default-avatar.png'" 
+            alt="Jugador" 
+            class="rounded-circle me-3" 
+            width="60" height="60" 
+            style="object-fit: cover; border: 2px solid var(--accent-color);"
+          />
+          <div>
+            <h5 class="mb-0">{{ report.player.nombre }} <small class="text-muted">- {{ report.player.equipo }}</small></h5>
+            <small class="text-muted">Nacionalidad: {{ report.player.nacionalidad }}</small>
+          </div>
+        </div>
+        <span class="text-muted fs-4" [ngClass]="{ 'rotate': report.expanded }" style="transition: transform 0.3s;">▶</span>
       </div>
 
-      <div class="section user-info">
-        <h4>Generado por</h4>
-        <p><strong>Nombre:</strong> {{ report.user.nombre }}</p>
-        <p><strong>Email:</strong> {{ report.user.email }}</p>
+      <!-- Declaración -->
+      <div class="mb-3">
+        <h6 class="text-secondary fw-semibold">📝 Declaración</h6>
+        <p class="mb-1"><strong>Texto:</strong> "{{ report.declaration.texto }}"</p>
+        <p class="mb-1"><strong>Categoría:</strong> {{ report.declaration.categoria_texto }}</p>
+        <p class="mb-0"><strong>Fecha:</strong> {{ report.declaration.created_at | date: 'medium' }}</p>
       </div>
 
-      <button (click)="exportReportAsPDF(report)" class="pdf-btn">📄 Exportar PDF</button>
+      <!-- Contenido expandible -->
+      <div *ngIf="report.expanded">
+        <hr />
+        <div class="mb-3">
+          <h6 class="text-secondary fw-semibold">📊 Análisis de IA</h6>
+          <p><strong>Emoción Detectada:</strong> {{ report.analysis.emocion_detectada }}</p>
+          <p><strong>Tendencia Emocional:</strong> {{ report.analysis.tendencia_emocional }}</p>
+          <p><strong>Impacto en Rendimiento:</strong> {{ report.analysis.impacto_en_rendimiento }}</p>
+          <p><strong>Impacto en Equipo:</strong> {{ report.analysis.impacto_en_equipo }}</p>
+          <p><strong>Rendimiento Predicho:</strong> {{ report.analysis.rendimiento_predicho }}</p>
+          <p><strong>Resumen:</strong> {{ report.analysis.resumen_general }}</p>
+          <p><strong>Acciones Recomendadas:</strong> {{ report.analysis.acciones_recomendadas }}</p>
+        </div>
+
+        <div class="mb-3">
+          <h6 class="text-secondary fw-semibold">👤 Generado por</h6>
+          <p><strong>Nombre:</strong> {{ report.user.nombre }}</p>
+          <p><strong>Email:</strong> {{ report.user.email }}</p>
+        </div>
+
+        <button class="btn btn-outline-primary" (click)="exportReportAsPDF(report)">
+          📄 Exportar PDF
+        </button>
+      </div>
+
     </div>
   </div>
 </div>

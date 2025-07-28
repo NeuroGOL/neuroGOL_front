@@ -1,16 +1,36 @@
-<div class="reports-container">
-  <h2>Jugadores con Reportes Generados</h2>
-
-  <div *ngIf="playersWithReports.length === 0" class="empty-state">
-    <p>No hay reportes generados aún.</p>
+<div class="container my-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold text-primary">Jugadores con Reportes Generados</h2>
   </div>
 
-  <div class="players-grid" *ngIf="playersWithReports.length > 0">
-    <div class="player-card" *ngFor="let player of playersWithReports">
-      <img [src]="player.profile_picture || 'assets/default-avatar.png'" alt="Jugador" class="avatar" />
-      <h3>{{ player.nombre }}</h3>
-      <p>{{ player.equipo }}</p>
-      <button (click)="viewReportsOfPlayer(player.id)">Ver Reportes</button>
+  <div *ngIf="playersWithReports.length === 0" class="text-center text-muted py-5">
+    <i class="bi bi-bar-chart-line fs-1"></i>
+    <p class="mt-3">No hay reportes generados aún.</p>
+  </div>
+
+  <div class="row gy-4" *ngIf="playersWithReports.length > 0">
+    <div class="col-md-6 col-lg-4" *ngFor="let player of playersWithReports">
+      <div class="card h-100 shadow-sm border-0">
+        <div class="card-body text-center">
+          <img 
+            [src]="player.profile_picture || 'assets/default-avatar.png'" 
+            alt="Jugador" 
+            class="rounded-circle mb-3" 
+            width="80" height="80"
+            style="object-fit: cover; border: 3px solid var(--accent-color);"
+          />
+
+          <h5 class="mb-1">{{ player.nombre }}</h5>
+          <p class="text-muted">{{ player.equipo }}</p>
+
+          <button 
+            class="btn btn-outline-primary btn-sm mt-2" 
+            (click)="viewReportsOfPlayer(player.id)"
+          >
+            Ver Reportes
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

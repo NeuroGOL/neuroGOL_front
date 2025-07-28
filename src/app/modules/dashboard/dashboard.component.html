@@ -1,26 +1,35 @@
-<div class="dashboard-page">
-  <section class="intro">
-    <h1>Bienvenido a NeuroGOL</h1>
-    <p>
-      Esta plataforma fue diseñada para analizar cómo el estado emocional influye en el rendimiento de los jugadores del Fútbol Profesional Colombiano (FPC).
-      Gestiona jugadores, registra declaraciones y genera reportes respaldados por análisis de IA.
-    </p>
+<div class="dashboard-page container py-5">
+  <section class="intro text-center mb-5">
+    <h1 class="fw-bold text-primary-dark">Bienvenido a <span class="text-accent">NeuroGOL</span></h1>
+    <p class="text-muted mt-2 fs-6">Analiza el impacto emocional en el rendimiento de los jugadores del FPC con IA.</p>
   </section>
 
-  <section class="cards">
-    <a routerLink="/dashboard/players" class="card">
-      <h2>⚽ Jugadores</h2>
-      <p>Administra el perfil emocional y deportivo de cada jugador.</p>
-    </a>
+  <section class="row g-4 justify-content-center">
+    <div class="col-md-4">
+      <a routerLink="/dashboard/players" class="card dashboard-card h-100">
+        <div class="card-body">
+          <h5 class="dashboard-title">Jugadores</h5>
+          <p class="dashboard-desc">Administra el perfil emocional y deportivo de cada jugador.</p>
+        </div>
+      </a>
+    </div>
 
-    <a routerLink="/dashboard/declarations" class="card">
-      <h2>📝 Declaraciones</h2>
-      <p>Registra opiniones y emociones antes y después de cada partido.</p>
-    </a>
+    <div class="col-md-4">
+      <a routerLink="/dashboard/declarations" class="card dashboard-card h-100">
+        <div class="card-body">
+          <h5 class="dashboard-title">Declaraciones</h5>
+          <p class="dashboard-desc">Registra opiniones y emociones antes y después de cada partido.</p>
+        </div>
+      </a>
+    </div>
 
-    <a routerLink="/dashboard/reports" class="card">
-      <h2>📊 Reportes</h2>
-      <p>Visualiza el impacto emocional en el desempeño con IA.</p>
-    </a>
+    <div class="col-md-4">
+      <a routerLink="/dashboard/reports" class="card dashboard-card h-100">
+        <div class="card-body">
+          <h5 class="dashboard-title">Reportes</h5>
+          <p class="dashboard-desc">Visualiza cómo las emociones afectan el rendimiento con IA.</p>
+        </div>
+      </a>
+    </div>
   </section>
 </div>

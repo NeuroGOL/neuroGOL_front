@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
+import { UserModel } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,7 @@ export class AuthService {
       });
     });
   }
-  
+
 
   /** 🔹 Registrar un nuevo usuario */
   register(user: { nombre: string; email: string; contrasena: string; role_id?: number; profile_picture?: string }): Observable<any> {
@@ -65,6 +66,10 @@ export class AuthService {
   /** 🔹 Obtener el usuario autenticado */
   getUser(): any {
     return JSON.parse(localStorage.getItem('user') || '{}');
+  }
+
+  setUser(user: UserModel): void {
+    localStorage.setItem('user', JSON.stringify(user));
   }
 
   /** 🔹 Saber si el usuario está autenticado */

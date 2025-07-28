@@ -1,0 +1,59 @@
+<div class="container py-4 px-3">
+  <div class="card shadow-lg p-4 border-0 mx-auto" style="max-width: 600px;" [@fade]>
+    
+    <div *ngIf="alertMessage" class="alert alert-{{ alertType }} alert-dismissible fade show" role="alert">
+      {{ alertMessage }}
+      <button type="button" class="btn-close" (click)="closeAlert()" aria-label="Close"></button>
+    </div>
+
+    <!-- Modo solo lectura -->
+    <div *ngIf="!editMode" @fade>
+      <div class="text-center mb-4">
+        <h3 class="fw-bold mb-2" style="color: var(--primary-color)">Mi Perfil</h3>
+        <img [src]="updatedUser.profile_picture || 'https://via.placeholder.com/100'" 
+             class="rounded-circle shadow-sm"
+             style="width: 100px; height: 100px; object-fit: cover;" />
+      </div>
+
+      <ul class="list-group mb-4">
+        <li class="list-group-item"><strong>Nombre:</strong> {{ updatedUser.nombre }}</li>
+        <li class="list-group-item"><strong>Correo:</strong> {{ updatedUser.email }}</li>
+        <li class="list-group-item"><strong>Rol:</strong> {{ updatedUser.role_id === 1 ? 'Administrador' : 'Analista' }}</li>
+      </ul>
+
+      <div class="text-end">
+        <button class="btn btn-primary" (click)="editMode = true">Editar Perfil</button>
+      </div>
+    </div>
+
+    <!-- Formulario de edición -->
+    <form *ngIf="editMode" (ngSubmit)="saveProfile()" class="row g-3" @fade>
+      <div class="text-center">
+        <img [src]="updatedUser.profile_picture || 'https://via.placeholder.com/100'" 
+             class="rounded-circle shadow-sm mb-2"
+             style="width: 100px; height: 100px; object-fit: cover;" />
+      </div>
+
+      <div class="col-12">
+        <label for="nombre" class="form-label">Nombre completo</label>
+        <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="updatedUser.nombre" required />
+      </div>
+
+      <div class="col-12">
+        <label for="email" class="form-label">Correo electrónico</label>
+        <input type="email" class="form-control" id="email" name="email" [(ngModel)]="updatedUser.email" required />
+      </div>
+
+      <div class="col-12">
+        <label for="profile_picture" class="form-label">Foto de perfil (URL)</label>
+        <input type="text" class="form-control" id="profile_picture" name="profile_picture"
+               [(ngModel)]="updatedUser.profile_picture" />
+      </div>
+
+      <div class="col-12 d-flex justify-content-end gap-2">
+        <button type="submit" class="btn btn-success">Guardar cambios</button>
+        <button type="button" class="btn btn-outline-secondary" (click)="cancelEdit()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>

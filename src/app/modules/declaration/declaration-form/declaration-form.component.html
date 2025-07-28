@@ -1,38 +1,68 @@
-<div class="declaration-form-container">
-  <h2>{{ isEditMode ? 'Editar Declaración' : 'Agregar Declaración' }}</h2>
-
-  <form (ngSubmit)="saveDeclaration()">
-    <label for="player_id">Jugador</label>
-    <select [(ngModel)]="declaration.player_id" name="player_id" id="player_id" required>
-      <option *ngFor="let player of playersArray" [value]="player.id">
-        {{ player.nombre }}
-      </option>
-    </select>
-
-    <label for="categoria">Categoría</label>
-    <select [(ngModel)]="declaration.categoria_texto" name="categoria_texto" id="categoria" required>
-      <option value="Previo al partido">Previo al partido</option>
-      <option value="Post-partido">Post-partido</option>
-      <option value="Durante entrenamiento">Durante entrenamiento</option>
-      <option value="Lesión">Lesión</option>
-    </select>
-
-    <label for="fuente">Fuente</label>
-    <select [(ngModel)]="declaration.fuente" name="fuente" id="fuente" required>
-      <option value="Entrevista">Entrevista</option>
-      <option value="Redes Sociales">Redes Sociales</option>
-      <option value="Conferencia de prensa">Conferencia de prensa</option>
-      <option value="Otro">Otro</option>
-    </select>
-
-    <label for="texto">Comentario</label>
-    <textarea [(ngModel)]="declaration.texto" name="texto" id="texto" required></textarea>
-
-    <div class="form-actions">
-      <button type="submit" class="btn-confirm">
-        {{ isEditMode ? 'Guardar Cambios' : 'Agregar Declaración' }}
-      </button>
-      <button type="button" class="btn-cancel" (click)="navigateToDeclarationList()">Cancelar</button>
+<div class="container py-4 px-3">
+  <div class="card shadow-lg p-4 border-0 mx-auto" style="max-width: 650px;">
+    
+    <div class="text-center mb-4">
+      <h3 class="fw-bold mb-2" style="color: var(--primary-color)">
+        {{ isEditMode ? 'Editar Declaración' : 'Agregar Declaración' }}
+      </h3>
     </div>
-  </form>
+
+    <form (ngSubmit)="saveDeclaration()" class="row g-3">
+      <!-- Jugador -->
+      <div class="col-12">
+        <label for="player_id" class="form-label">Jugador</label>
+        <select class="form-select" id="player_id" name="player_id"
+          [(ngModel)]="declaration.player_id" required>
+          <option value="" disabled selected>Seleccione un jugador</option>
+          <option *ngFor="let player of playersArray" [value]="player.id">
+            {{ player.nombre }}
+          </option>
+        </select>
+      </div>
+
+      <!-- Categoría -->
+      <div class="col-md-6">
+        <label for="categoria" class="form-label">Categoría</label>
+        <select class="form-select" id="categoria" name="categoria_texto"
+          [(ngModel)]="declaration.categoria_texto" required>
+          <option value="" disabled selected>Seleccione una categoría</option>
+          <option value="Previo al partido">Previo al partido</option>
+          <option value="Post-partido">Post-partido</option>
+          <option value="Durante entrenamiento">Durante entrenamiento</option>
+          <option value="Lesión">Lesión</option>
+        </select>
+      </div>
+
+      <!-- Fuente -->
+      <div class="col-md-6">
+        <label for="fuente" class="form-label">Fuente</label>
+        <select class="form-select" id="fuente" name="fuente"
+          [(ngModel)]="declaration.fuente" required>
+          <option value="" disabled selected>Seleccione la fuente</option>
+          <option value="Entrevista">Entrevista</option>
+          <option value="Redes Sociales">Redes Sociales</option>
+          <option value="Conferencia de prensa">Conferencia de prensa</option>
+          <option value="Otro">Otro</option>
+        </select>
+      </div>
+
+      <!-- Comentario -->
+      <div class="col-12">
+        <label for="texto" class="form-label">Comentario</label>
+        <textarea class="form-control" id="texto" name="texto" rows="4"
+          [(ngModel)]="declaration.texto" placeholder="Escribe la declaración aquí..." required></textarea>
+      </div>
+
+      <!-- Acciones -->
+      <div class="col-12 d-flex flex-column flex-md-row justify-content-end gap-2 mt-3">
+        <button type="button" class="btn btn-outline-secondary w-100 w-md-auto"
+          (click)="navigateToDeclarationList()">
+          Cancelar
+        </button>
+        <button type="submit" class="btn btn-success w-100 w-md-auto">
+          {{ isEditMode ? 'Guardar Cambios' : 'Agregar Declaración' }}
+        </button>
+      </div>
+    </form>
+  </div>
 </div>

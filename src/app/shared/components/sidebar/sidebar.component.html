@@ -1,48 +1,53 @@
-<div class="dashboard-layout" [class.collapsed]="sidebarCollapsed">
-  <!-- Sidebar -->
-  <aside class="sidebar">
-    <!-- Botón toggle dentro del sidebar -->
-    <button class="toggle-button" (click)="toggleSidebar()">☰</button>
+<aside class="sidebar shadow" [class.collapsed]="sidebarCollapsed">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <a routerLink="/dashboard" *ngIf="!sidebarCollapsed">
+      <img src="/assets/neurogol.png" class="logo-img" alt="NeuroGOL Logo" />
+    </a>
+    <button class="btn btn-sm toggle-button" (click)="toggleSidebar()" title="Menú">
+      <i class="bi bi-chevron-double-left" *ngIf="!sidebarCollapsed"></i>
+      <i class="bi bi-chevron-double-right" *ngIf="sidebarCollapsed"></i>
+    </button>
 
-    <!-- Logo (cuando sidebar NO está colapsado) -->
-    <a *ngIf="!sidebarCollapsed" routerLink="/dashboard" class="logo-link">
-      <img src="/assets/neurogol.png" alt="NeuroGol Logo" class="logo-img" />
+  </div>
+
+  <nav class="nav flex-column gap-2">
+    <a class="nav-link d-flex align-items-center" routerLink="/dashboard/players" routerLinkActive="active">
+      <i class="bi bi-people-fill me-2"></i>
+      <span *ngIf="!sidebarCollapsed">Jugadores</span>
+    </a>
+    <a class="nav-link d-flex align-items-center" routerLink="/dashboard/declarations" routerLinkActive="active">
+      <i class="bi bi-file-earmark-text me-2"></i>
+      <span *ngIf="!sidebarCollapsed">Declaraciones</span>
+    </a>
+    <a class="nav-link d-flex align-items-center" routerLink="/dashboard/reports" routerLinkActive="active">
+      <i class="bi bi-bar-chart-line me-2"></i>
+      <span *ngIf="!sidebarCollapsed">Reportes</span>
     </a>
 
+    <a class="nav-link d-flex align-items-center" routerLink="/dashboard/profile" routerLinkActive="active">
+      <i class="bi bi-person-circle me-2"></i>
+      <span *ngIf="!sidebarCollapsed">Mi Perfil</span>
+    </a>
+  </nav>
 
-    <nav class="nav-links">
-      <a routerLink="/dashboard/players" routerLinkActive="active">
-        <span class="icon">⚽</span>
-        <span class="text" *ngIf="!sidebarCollapsed">Jugadores</span>
-      </a>
-      <a routerLink="/dashboard/declarations" routerLinkActive="active">
-        <span class="icon">📝</span>
-        <span class="text" *ngIf="!sidebarCollapsed">Declaraciones</span>
-      </a>
-      <a routerLink="/dashboard/reports" routerLinkActive="active">
-        <span class="icon">📊</span>
-        <span class="text" *ngIf="!sidebarCollapsed">Reportes</span>
-      </a>
-    </nav>
-
-    <!-- Usuario logueado -->
-    <div class="user-info" *ngIf="user && !sidebarCollapsed">
-      <img [src]="user.profile_picture || 'assets/default-avatar.png'" alt="User" class="user-avatar" />
-      <div>
-        <p class="user-name">{{ user.nombre }}</p>
-        <p class="user-email">{{ user.email }}</p>
+  <div class="mt-auto pt-4">
+    <div class="d-flex align-items-center bg-opacity-10 bg-light rounded p-2 mb-3" *ngIf="user && !sidebarCollapsed">
+      <img [src]="user.profile_picture || 'assets/default-avatar.png'" class="rounded-circle me-2"
+        style="width: 36px; height: 36px; object-fit: cover;" />
+      <div class="overflow-hidden">
+        <div class="text-white fw-semibold text-truncate" style="max-width: 130px;">{{ user.nombre }}</div>
+        <small class="text-muted text-truncate d-block" style="max-width: 130px;">{{ user.email }}</small>
       </div>
     </div>
 
-
-    <button (click)="logout()" class="logout-button">
-      <span class="icon">🚪</span>
-      <span class="text" *ngIf="!sidebarCollapsed">Cerrar Sesión</span>
+    <button (click)="logout()" class="btn text-danger d-flex align-items-center w-100">
+      <i class="bi bi-box-arrow-right me-2"></i>
+      <span *ngIf="!sidebarCollapsed">Cerrar Sesión</span>
     </button>
-  </aside>
+  </div>
+</aside>
 
-  <!-- Contenido principal -->
-  <main class="main-content">
-    <router-outlet></router-outlet>
-  </main>
-</div>
+<!-- Contenido principal -->
+<main class="main-content">
+  <router-outlet></router-outlet>
+</main>

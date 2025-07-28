@@ -1,29 +1,30 @@
-<div class="players-container">
-  <div class="players-header">
-    <h2>Jugadores</h2>
-    <button class="add-button" (click)="navigateToNewPlayer()">+ Agregar Jugador</button>
+<div class="container py-4 px-3">
+  <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+    <h2 class="fw-bold mb-0">Jugadores</h2>
+    <button class="btn btn-success d-flex align-items-center gap-2" (click)="navigateToNewPlayer()">
+      <i class="bi bi-plus-lg"></i> <span>Agregar Jugador</span>
+    </button>
   </div>
 
-  <input
-    type="text"
-    class="search-bar"
-    placeholder="Buscar por nombre o equipo..."
-    [(ngModel)]="filter"
-    (input)="applyFilter()"
-  />
+  <input type="text" class="form-control mb-4" placeholder="Buscar por nombre o equipo..." [(ngModel)]="filter"
+    (input)="applyFilter()" />
 
-  <div class="players-grid">
-    <div class="player-card" *ngFor="let player of filteredPlayers">
-      <div class="profile-section">
-        <img [src]="player.profile_picture || 'assets/default-avatar.png'" class="avatar-large" />
-        <div class="info">
-          <h3>{{ player.nombre }}</h3>
-          <p class="equipo"><span class="icon">📍</span> {{ player.equipo }}</p>
+  <div class="row g-4">
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let player of filteredPlayers">
+      <div class="player-card">
+        <div class="player-card-img-wrapper">
+          <img [src]="player.profile_picture || 'assets/default-avatar.png'" alt="Jugador" class="w-100 rounded">
+          <div class="player-info-overlay">
+            <div class="player-basic">
+              <h5>{{ player.nombre }}</h5>
+              <p>{{ player.equipo }}</p>
+            </div>
+            <div class="hover-actions">
+              <button class="btn btn-sm btn-light me-2" (click)="editPlayer(player.id)">Editar</button>
+              <button class="btn btn-sm btn-danger" (click)="deletePlayer(player.id)">Eliminar</button>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="card-actions">
-        <button class="edit" (click)="editPlayer(player.id)">Editar</button>
-        <button class="delete" (click)="deletePlayer(player.id)">Eliminar</button>
       </div>
     </div>
   </div>
