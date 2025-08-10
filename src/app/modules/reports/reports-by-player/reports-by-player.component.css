@@ -1,36 +1,66 @@
-.reports-by-player-container {
-  background-color: var(--bg-color);
+/* Contenedor */
+.reports-by-player-container { background-color: var(--bg-color); }
+
+/* Header clicable sin parecer "juguete" */
+.report-header { cursor: pointer; }
+
+/* Chevron minimalista */
+.chevron-btn {
+  border: 0; background: transparent; padding: .25rem; font-size: 1.25rem; line-height: 1;
+  color: var(--text-color);
+  transition: transform .25s ease;
+}
+.rotate-90 { transform: rotate(90deg); }
+
+/* Secciones */
+.section-label {
+  font-size: .8rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: #64748b; /* gris profesional */
+  margin-bottom: .25rem;
 }
 
-/* Flecha giratoria */
-.rotate {
-  transform: rotate(90deg);
+/* Declaración */
+.declaration blockquote {
+  border-left: 3px solid var(--accent-color);
+  margin: .25rem 0 .5rem;
+  padding: .25rem 0 .25rem .75rem;
+  color: var(--text-color);
+  background: #ffffff;
+  border-radius: .25rem;
 }
 
-/* Cursor al pasar sobre el encabezado */
-.cursor-pointer {
-  cursor: pointer;
+/* DL limpio */
+.dl-clean { margin: 0; }
+.dl-clean dt {
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-top: .5rem;
+  font-size: .92rem;
+}
+.dl-clean dd {
+  margin-left: 0;
+  margin-bottom: .5rem;
+  color: var(--text-color);
 }
 
-/* Card padding */
-.card-body {
-  padding: 1.5rem;
+/* Meta y etiquetas */
+.meta-label { color: #475569; font-weight: 600; }
+.emotion-badge {
+  background: #e2e8f0; /* neutral */
+  color: #0f172a;
+  border: 1px solid #cbd5e1;
+  padding: .35rem .5rem;
+  letter-spacing: .04em;
 }
 
-/* Botón PDF personalizado (si no usas btn-outline-primary) */
-.pdf-btn {
-  background-color: var(--accent-color);
-  border: none;
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  transition: background-color 0.3s;
-}
+/* Cards */
+.card { border-radius: 1rem; background: var(--card-color); }
+.card-body { padding: 1.25rem; }
 
-.pdf-btn:hover {
-  background-color: #12803a; /* tono más oscuro del verde */
-}
+/* Botones */
+.btn:hover { filter: brightness(1.05); transition: .2s; }
 
-.text-primary {
-  color: var(--primary-color) !important;
-}
+/* Respetar tu paleta */
+.text-primary { color: var(--primary-color) !important; }

@@ -98,7 +98,7 @@ export class DeclarationListComponent implements OnInit {
   }
 
   getPlayerImage(id: number): string {
-    return this.players.get(id)?.profile_picture || 'assets/default-avatar.png';
+    return this.players.get(id)?.profile_picture || 'assets/sinfoto.png';
   }
 
   getUserName(id: number): string {
