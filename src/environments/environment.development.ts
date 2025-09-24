@@ -1,5 +1,4 @@
 export const environment = {
   production: true,
-  // apiUrl: 'https://neurogol-back.onrender.com/api', 
-  apiUrl: 'http://localhost:5000'
+  apiUrl: 'https://neurogol-app-jc74i.ondigitalocean.app/', 
 };
