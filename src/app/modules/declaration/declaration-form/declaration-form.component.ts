@@ -63,36 +63,54 @@ export class DeclarationFormComponent implements OnInit {
       return;
     }
 
-    // 🔹 Obtener el usuario autenticado desde el AuthService
     const user = this.authService.getUser();
     if (!user?.id) {
       this.notificationService.showError("❌ Error: No se encontró el usuario autenticado.");
       return;
     }
 
-    // 🔹 Asignar el `user_id` antes de enviar
     this.declaration.user_id = user.id;
 
-    this.declarationService.createDeclaration(this.declaration).subscribe({
-      next: (newDeclaration) => {
-        this.notificationService.showSuccess("✅ Declaración creada exitosamente.");
-        this.router.navigate(['/dashboard/declarations']);
-      },
-      error: (err) => {
-        console.error("❌ Error al crear declaración:", err);
-
-        // 🔹 Si el error tiene un array `errors`, mostramos los mensajes individuales
-        if (err.error?.errors) {
-          const errorMessages = err.error.errors.map((e: any) => `• ${e.msg}`).join('<br>');
-          this.notificationService.showError(errorMessages, "Errores de validación");
-        } else {
-          this.notificationService.showError("Error al guardar la declaración.");
-        }
+    if (this.isEditMode && this.declaration.id) {
+      // ✅ Modo edición → actualizar
+      if (
+        typeof this.declaration.player_id === 'number' &&
+        typeof this.declaration.user_id === 'number' &&
+        typeof this.declaration.id === 'number'
+      ) {
+        this.declarationService.updateDeclaration(this.declaration as DeclarationModel).subscribe({
+          next: () => {
+            this.notificationService.showSuccess("✅ Declaración actualizada exitosamente.");
+            this.router.navigate(['/dashboard/declarations']);
+          },
+          error: (err) => {
+            console.error("❌ Error al actualizar declaración:", err);
+            this.notificationService.showError("Error al actualizar la declaración.");
+          }
+        });
+      } else {
+        this.notificationService.showError("❌ Error: Faltan campos obligatorios en la declaración.");
       }
-    });
+    } else {
+      // ➕ Modo creación → crear
+      this.declarationService.createDeclaration(this.declaration).subscribe({
+        next: () => {
+          this.notificationService.showSuccess("✅ Declaración creada exitosamente.");
+          this.router.navigate(['/dashboard/declarations']);
+        },
+        error: (err) => {
+          console.error("❌ Error al crear declaración:", err);
+          if (err.error?.errors) {
+            const errorMessages = err.error.errors.map((e: any) => `• ${e.msg}`).join('<br>');
+            this.notificationService.showError(errorMessages, "Errores de validación");
+          } else {
+            this.notificationService.showError("Error al guardar la declaración.");
+          }
+        }
+      });
+    }
   }
-
-
+  
   navigateToDeclarationList() {
     this.router.navigate(['/dashboard/declarations']);
   }

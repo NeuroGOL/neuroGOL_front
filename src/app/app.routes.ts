@@ -13,6 +13,8 @@ import { DeclarationFormComponent } from './modules/declaration/declaration-form
 import { DeclarationListComponent } from './modules/declaration/declaration-list/declaration-list.component';
 import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
 import { ReportsByPlayerComponent } from './modules/reports/reports-by-player/reports-by-player.component';
+import { EditarPerfilComponent } from './modules/perfil/editar-perfil/editar-perfil.component';
+import { AnalysisNplModalComponent } from './modules/analysis/analysis-npl-modal/analysis-npl-modal.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -35,11 +37,14 @@ export const routes: Routes = [
       { path: 'declaration/new', component: DeclarationFormComponent },
       { path: 'declaration/edit/:id', component: DeclarationFormComponent },
 
+      { path: 'analisis/:id', component: AnalysisNplModalComponent },
 
       { path: 'reports', component: ReportsListComponent },
       { path: 'reports/:id', component: ReportsByPlayerComponent },
+
+      { path: 'profile', component: EditarPerfilComponent }
     ]
   },
 
-  { path: '**', redirectTo: 'dashboard' }
+  // { path: '**', redirectTo: 'dashboard' }
 ];

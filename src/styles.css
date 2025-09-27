@@ -1,21 +1,33 @@
-/* You can add global styles to this file, and also import other style files */
 :root {
-    --green: #1DB954;
-    --dark: #121212;
-    --light: #f5f5f5;
-    --accent: #2ecc71;
-    --radius: 12px;
-    --font: 'Inter', sans-serif;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  --primary-color: #0f172a;     /* Azul oscuro elegante */
+  --accent-color: #16a34a;      /* Verde profesional */
+  --bg-color: #f1f5f9;
+  --text-color: #1e293b;
+  --card-color: #ffffff;
+  --error-color: #dc2626;
 }
 
 body {
-    font-family: var(--font);
-    background-color: var(--dark);
-    color: var(--light);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: 'Segoe UI', 'Inter', sans-serif;
+}
+
+.card {
+  border-radius: 1rem;
+}
+
+.btn:hover {
+  filter: brightness(1.1);
+  transition: 0.3s;
+}
+
+img {
+  user-select: none;
+}
+
+input:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: var(--accent-color) !important;
 }

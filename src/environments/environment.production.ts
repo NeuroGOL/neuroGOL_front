@@ -1,4 +1,4 @@
 export const environment = {
-  production: false,
+  production: true,
   apiUrl: 'https://neurogol-app-jc74i.ondigitalocean.app'
 };

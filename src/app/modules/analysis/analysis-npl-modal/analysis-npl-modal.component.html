@@ -1,35 +1,85 @@
-<div *ngIf="isOpen" class="modal-overlay">
-  <div class="modal">
-    <h3>Análisis de IA</h3>
+<div class="container py-5">
+  <div class="card shadow border-0" style="background-color: var(--card-color); border-radius: 1rem;">
 
-    <ng-container *ngIf="analysis; else noAnalysis">
-      <div class="analysis-group">
-        <p><strong>Emoción Detectada:</strong> {{ analysis.emocion_detectada }}</p>
-        <p><strong>Tendencia Emocional:</strong> {{ analysis.tendencia_emocional }}</p>
-        <p><strong>Impacto en Rendimiento:</strong> {{ analysis.impacto_en_rendimiento }}</p>
-        <p><strong>Impacto en Equipo:</strong> {{ analysis.impacto_en_equipo }}</p>
-        <p><strong>Estado Emocional Actual:</strong> {{ analysis.estado_actual_emocional }}</p>
-        <p><strong>Rendimiento Predicho:</strong> {{ analysis.rendimiento_predicho }}</p>
-        <p><strong>Resumen:</strong> {{ analysis.resumen_general }}</p>
-        <p><strong>Acciones Recomendadas:</strong> {{ analysis.acciones_recomendadas }}</p>
+    <!-- Header -->
+    <div class="card-header d-flex justify-content-between align-items-center px-4 py-3"
+      style="background-color: var(--primary-color); color: white; border-top-left-radius: 1rem; border-top-right-radius: 1rem;">
+      <h4 class="mb-0">Análisis de Declaración</h4>
+      <button class="btn btn-outline-light btn-sm" (click)="router.navigate(['/dashboard/declarations'])">
+        ← Volver
+      </button>
+    </div>
+
+    <!-- Body -->
+    <div class="card-body p-4" *ngIf="!isLoading && analysis && player && declaration">
+      <div class="row g-4">
+
+        <!-- Jugador -->
+        <div class="col-md-4 d-flex flex-column align-items-center text-center">
+          <img [src]="player.profile_picture || 'assets/sinfoto.png'" class="rounded-circle shadow mb-3"
+            style="width: 110px; height: 110px; object-fit: cover;">
+          <div>
+            <p class="mb-1"><strong>Nombre:</strong> {{ player.nombre }}</p>
+            <p class="mb-1"><strong>Equipo:</strong> {{ player.equipo }}</p>
+            <p class="mb-1"><strong>Nacionalidad:</strong> {{ player.nacionalidad }}</p>
+          </div>
+        </div>
+
+        <!-- Declaración -->
+        <div class="col-md-8">
+          <h5 class="fw-bold text-uppercase mb-3" style="color: var(--primary-color)">Declaración</h5>
+          <div class="row mb-2">
+            <div class="col-sm-6"><strong>ID de Declaración:</strong> {{ declaration.id }}</div>
+            <div class="col-sm-6"><strong>Fecha de Análisis:</strong> {{ analysis.created_at | date:'medium' }}</div>
+          </div>
+          <div class="p-3 bg-light border rounded text-dark fst-italic">
+            “{{ declaration.texto }}”
+          </div>
+        </div>
       </div>
 
-      <div class="modal-buttons">
-        <button (click)="generateReport()" class="generate-btn" [class.disabled-report]="hasReport"
-          [disabled]="isLoading || hasReport">
-          {{ hasReport ? 'Reporte ya generado' : 'Generar Reporte' }}
+      <!-- Resultado -->
+      <div class="mt-5">
+        <h5 class="fw-bold text-uppercase mb-3" style="color: var(--primary-color)">Resultado del Análisis</h5>
+
+        <div class="row mb-3">
+          <div class="col-md-4">
+            <strong style="color: var(--accent-color)">Emoción Detectada:</strong>
+            <div class="badge bg-light text-dark border border-success px-3 py-1 mt-1">
+              {{ translateEmotion(analysis.emocion_detectada) }}
+            </div>
+          </div>
+          <div class="col-md-4">
+            <strong style="color: var(--accent-color)">Rendimiento Predicho:</strong>
+            <div class="badge bg-light text-dark border border-success px-3 py-1 mt-1">
+              {{ analysis.rendimiento_predicho }}
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <strong style="color: var(--accent-color)">Resumen General:</strong>
+          <div class="p-3 bg-light border rounded text-dark small mt-2">
+            {{ analysis.resumen_general }}
+          </div>
+        </div>
+      </div>
+
+      <!-- Botón -->
+      <div class="text-end mt-4">
+        <button class="btn" style="background-color: var(--accent-color); color: white" [disabled]="hasReport"
+          (click)="generateReport()">
+          {{ hasReport ? '✅ Reporte ya generado' : 'Generar Reporte' }}
         </button>
-
-
-        <button (click)="closeModal()" class="close-btn">Cerrar</button>
       </div>
-    </ng-container>
+    </div>
 
-    <ng-template #noAnalysis>
-      <p class="no-analysis">No se encontró un análisis para esta declaración.</p>
-      <div class="modal-buttons">
-        <button (click)="closeModal()" class="close-btn">Cerrar</button>
+    <!-- Loading -->
+    <div *ngIf="isLoading" class="text-center my-5">
+      <div class="spinner-border text-success" role="status">
+        <span class="visually-hidden">Cargando...</span>
       </div>
-    </ng-template>
+      <p class="mt-3 text-muted">Cargando análisis...</p>
+    </div>
   </div>
 </div>

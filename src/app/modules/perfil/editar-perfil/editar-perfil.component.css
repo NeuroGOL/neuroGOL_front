@@ -1,12 +1,6 @@
-input:focus,
-select:focus {
+input:focus {
   border-color: var(--accent-color);
   box-shadow: 0 0 0 0.15rem rgba(22, 163, 74, 0.25);
-  transition: 0.2s ease-in-out;
-}
-
-button {
-  transition: all 0.3s ease;
 }
 
 button:hover {

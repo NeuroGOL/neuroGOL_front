@@ -1,78 +1,77 @@
-.dashboard-page {
-  padding: 40px;
-  color: var(--light);
-  background-color: var(--dark);
-  font-family: var(--font);
-}
-
-/* Intro */
-.intro h1 {
-  font-size: 32px;
-  margin-bottom: 15px;
-  color: var(--green);
-}
-
-.intro p {
-  font-size: 16px;
-  line-height: 1.6;
-  color: #ccc;
-  max-width: 700px;
-  margin-bottom: 40px;
-}
-
-/* Cards */
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 24px;
-}
-
-.card {
-  background-color: #1a1a1a;
-  border-radius: var(--radius);
-  padding: 24px;
+.dashboard-card {
+  position: relative;
+  background-color: var(--card-color);
+  border: none;
+  border-radius: 16px;
+  padding: 24px 20px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
   text-decoration: none;
-  color: var(--light);
-  transition: transform 0.2s ease, box-shadow 0.3s ease;
-  border-left: 5px solid var(--green);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  color: inherit;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s;
+  animation: fadeInUp 0.5s ease-in-out both;
 }
 
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+.dashboard-card:hover {
+  transform: translateY(-6px);
+  background-color: #f8fafc;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.12);
 }
 
-.card h2 {
-  font-size: 20px;
+.dashboard-title {
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: var(--primary-color);
   margin-bottom: 10px;
-  color: var(--accent);
 }
 
-.card p {
-  font-size: 14px;
-  color: #bbb;
+.dashboard-desc {
+  font-size: 0.95rem;
+  color: #6b7280;
+  margin: 0;
 }
 
-/* Responsive padding */
-@media (max-width: 600px) {
-  .dashboard-page {
-    padding: 20px;
-  }
+/* Marca de agua (ícono) */
+.dashboard-card::before {
+  content: "";
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  width: 48px;
+  height: 48px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.06;
+  filter: invert(1);
+}
 
-  .intro h1 {
-    font-size: 24px;
-  }
+a[routerLink="/dashboard/players"]::before {
+  background-image: url('/assets/icons/players.svg');
+}
 
-  .intro p {
-    font-size: 15px;
-  }
+a[routerLink="/dashboard/declarations"]::before {
+  background-image: url('/assets/icons/declarations.svg');
+}
 
-  .card h2 {
-    font-size: 18px;
-  }
+a[routerLink="/dashboard/reports"]::before {
+  background-image: url('/assets/icons/reports.svg');
+}
 
-  .card p {
-    font-size: 13px;
+/* Animación entrada */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
   }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dashboard-card:hover {
+  border-left: 4px solid var(--primary-color);
+  padding-left: 16px;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.12);
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.1s, border-left 0.1s ease, padding-left 0.1s ease;
 }

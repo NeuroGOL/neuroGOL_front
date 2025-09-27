@@ -1,8 +1,8 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { NotificationService } from '../../../core/services/notification.service';
 
 @Component({
@@ -24,27 +24,23 @@ export class LoginComponent {
   ) { }
 
   login() {
-    this.isLoading = true;
-    this.authService.login(this.credentials).subscribe({
-      next: () => {
-        this.notificationService.showSuccess('Inicio de sesión exitoso', 'Bienvenido');
-        this.router.navigate(['/dashboard']);
-        this.isLoading = false;
-      },
-      error: (err) => {
-        this.isLoading = false;
-        console.error('❌ Error en login:', err);
+  this.isLoading = true;
+  this.errorMessage = ''; // Limpiar errores anteriores
 
-        if (err.error?.errors) {
-          err.error.errors.forEach((errorMsg: any) => {
-            this.notificationService.showError(errorMsg.msg, 'Error en Login');
-          });
-        } else {
-          this.notificationService.showError('Credenciales incorrectas', 'Error');
-        }
-      }
-    });
-  }
+  this.authService.login(this.credentials).subscribe({
+    next: () => {
+      this.router.navigate(['/dashboard']);
+      this.isLoading = false;
+    },
+    error: (err) => {
+      this.isLoading = false;
+
+      // Capturar mensaje desde err.error.error
+      this.errorMessage = err.error?.error || 'Ocurrió un error inesperado';
+    }
+  });
+}
+
 
 }
 

@@ -1,18 +1,51 @@
-<div class="login-wrapper">
-  <form class="login-form" (submit)="login()" autocomplete="on">
-    <h2>Inicia sesión</h2>
+<div class="container d-flex justify-content-center align-items-center vh-100 fade-in">
+  <div class="card shadow-lg p-5 border-0 animate-scale"
+    style="max-width: 460px; width: 100%; background-color: var(--card-color); border-radius: 1rem;">
 
-    <input type="email" placeholder="Correo electrónico" [(ngModel)]="credentials.email" name="email" autocomplete="email" required />
+    <div class="text-center mb-4">
+      <img src="assets/neurogol.png" alt="NeuroGOL Logo" class="img-fluid fade-up" style="width: 80px;">
+      <h1 class="mt-3 fw-bold text-primary-dark fade-up" style="font-size: 1.8rem;">Bienvenido a NeuroGOL</h1>
+      <p class="text-muted small fade-up delay-1">Inicia sesión para continuar</p>
+    </div>
 
-    <input type="password" placeholder="Contraseña" [(ngModel)]="credentials.contrasena" name="contrasena" autocomplete="current-password" required />
+    <form (submit)="login()" autocomplete="on" class="fade-up delay-2">
+      <div class="mb-3">
+        <label for="email" class="form-label">Correo electrónico</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          [(ngModel)]="credentials.email"
+          class="form-control"
+          required
+          [ngClass]="{ 'is-invalid': errorMessage && !credentials.email.trim() }" />
+      </div>
 
-    <button type="submit" [disabled]="isLoading">Acceder</button>
+      <div class="mb-3">
+        <label for="password" class="form-label">Contraseña</label>
+        <input
+          type="password"
+          id="password"
+          name="contrasena"
+          [(ngModel)]="credentials.contrasena"
+          class="form-control"
+          required
+          [ngClass]="{ 'is-invalid': errorMessage && credentials.contrasena.length < 6 }" />
+      </div>
 
-    <p class="alt-link">
-      ¿No tienes cuenta?
-      <a routerLink="/register">Regístrate</a>
-    </p>
+      <button type="submit" [disabled]="isLoading" class="btn w-100 py-2 mt-2"
+        style="background-color: var(--accent-color); color: white; font-weight: 600; transition: all 0.3s;">
+        Acceder
+      </button>
 
-    <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
-  </form>
+      <p *ngIf="errorMessage" class="text-danger mt-3 text-center fw-medium shake-on-error" style="font-size: 0.95rem;">
+        {{ errorMessage }}
+      </p>
+
+      <p class="mt-4 text-center text-muted small fade-up delay-3">
+        ¿No tienes cuenta?
+        <a routerLink="/register" style="color: var(--accent-color); font-weight: 500;">Regístrate</a>
+      </p>
+    </form>
+  </div>
 </div>

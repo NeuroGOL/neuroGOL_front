@@ -78,55 +78,80 @@ export class ReportsByPlayerComponent implements OnInit {
     const logoUrl = 'assets/neurogol.png';
 
     element.innerHTML = `
-      <div style="
-        position: relative;
-        font-family: Arial, sans-serif;
-        padding: 60px 40px;
-        max-width: 800px;
-        color: #1c1c1c;
-      ">
-        <img src="${logoUrl}" style="
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          width: 60%;
-          transform: translate(-50%, -50%);
-          opacity: 0.15;
-          z-index: 0;
-        " />
-
-        <div style="position: relative; z-index: 1;">
-          <h2 style="color: #1DB954; border-bottom: 2px solid #1DB954; padding-bottom: 8px;">
-            Reporte de Evaluación Emocional
-          </h2>
-
-          <h3 style="margin-top: 30px;">🧍 Jugador</h3>
-          <p><strong>Nombre:</strong> ${reportData.player.nombre}</p>
-          <p><strong>Equipo:</strong> ${reportData.player.equipo}</p>
-          <p><strong>Nacionalidad:</strong> ${reportData.player.nacionalidad}</p>
-
-          <h3 style="margin-top: 30px;">📄 Declaración</h3>
-          <p><strong>Texto:</strong> “${reportData.declaration.texto}”</p>
-          <p><strong>Categoría:</strong> ${reportData.declaration.categoria_texto}</p>
-          <p><strong>Fuente:</strong> ${reportData.declaration.fuente}</p>
-          <p><strong>Fecha:</strong> ${new Date(reportData.declaration.created_at).toLocaleString()}</p>
-
-          <h3 style="margin-top: 30px;">🧠 Análisis de IA</h3>
-          <p><strong>Emoción Detectada:</strong> ${reportData.analysis.emocion_detectada}</p>
-          <p><strong>Tendencia Emocional:</strong> ${reportData.analysis.tendencia_emocional}</p>
-          <p><strong>Impacto en Rendimiento:</strong> ${reportData.analysis.impacto_en_rendimiento}</p>
-          <p><strong>Impacto en Equipo:</strong> ${reportData.analysis.impacto_en_equipo}</p>
-          <p><strong>Estado Actual:</strong> ${reportData.analysis.estado_actual_emocional}</p>
-          <p><strong>Rendimiento Predicho:</strong> ${reportData.analysis.rendimiento_predicho}</p>
-          <p><strong>Resumen:</strong> ${reportData.analysis.resumen_general}</p>
-          <p><strong>Acciones Recomendadas:</strong> ${reportData.analysis.acciones_recomendadas}</p>
-
-          <h3 style="margin-top: 30px;">👤 Generado por</h3>
-          <p><strong>Nombre:</strong> ${reportData.user.nombre}</p>
-          <p><strong>Email:</strong> ${reportData.user.email}</p>
-        </div>
+    <div style="
+      font-family: 'Helvetica', 'Arial', sans-serif;
+      padding: 40px;
+      max-width: 800px;
+      color: #1c1c1c;
+    ">
+      <!-- Encabezado -->
+      <div style="text-align: center; margin-bottom: 20px;">
+        <img src="${logoUrl}" style="height: 60px; margin-bottom: 10px;" />
+        <h2 style="margin: 0; font-size: 20px; text-transform: uppercase; letter-spacing: 1px;">
+          Expediente de Evaluación Emocional
+        </h2>
+        <hr style="margin-top: 10px; border: 1px solid #1DB954;" />
       </div>
-    `;
+
+      <!-- DATOS DEL JUGADOR -->
+      <h3 style="background: #f0f0f0; padding: 6px; border: 1px solid #ccc; margin-top: 20px;">DATOS DEL JUGADOR</h3>
+      <table style="width: 100%; border-collapse: collapse;">
+        <tr>
+          <td style="border: 1px solid #ccc; padding: 6px; width: 50%;"><strong>Nombre:</strong> ${reportData.player.nombre}</td>
+          <td style="border: 1px solid #ccc; padding: 6px;"><strong>Equipo:</strong> ${reportData.player.equipo}</td>
+        </tr>
+        <tr>
+          <td colspan="2" style="border: 1px solid #ccc; padding: 6px;"><strong>Nacionalidad:</strong> ${reportData.player.nacionalidad}</td>
+        </tr>
+      </table>
+
+      <!-- DECLARACIÓN -->
+      <h3 style="background: #f0f0f0; padding: 6px; border: 1px solid #ccc; margin-top: 20px;">DECLARACIÓN ANALIZADA</h3>
+      <table style="width: 100%; border-collapse: collapse;">
+        <tr>
+          <td colspan="2" style="border: 1px solid #ccc; padding: 6px;"><strong>Texto:</strong> “${reportData.declaration.texto}”</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid #ccc; padding: 6px;"><strong>Categoría:</strong> ${reportData.declaration.categoria_texto}</td>
+          <td style="border: 1px solid #ccc; padding: 6px;"><strong>Fuente:</strong> ${reportData.declaration.fuente}</td>
+        </tr>
+        <tr>
+          <td colspan="2" style="border: 1px solid #ccc; padding: 6px;"><strong>Fecha:</strong> ${new Date(reportData.declaration.created_at).toLocaleString()}</td>
+        </tr>
+      </table>
+
+      <!-- ANÁLISIS DE IA -->
+      <h3 style="background: #f0f0f0; padding: 6px; border: 1px solid #ccc; margin-top: 20px;">ANÁLISIS DE INTELIGENCIA ARTIFICIAL</h3>
+      <table style="width: 100%; border-collapse: collapse;">
+        <tr>
+          <td style="border: 1px solid #ccc; padding: 6px;"><strong>Emoción Detectada:</strong> ${reportData.analysis.emocion_detectada}</td>
+          <td style="border: 1px solid #ccc; padding: 6px;"><strong>Tendencia Emocional:</strong> ${reportData.analysis.tendencia_emocional}</td>
+        </tr>
+        <tr>
+          <td style="border: 1px solid #ccc; padding: 6px;"><strong>Impacto en Rendimiento:</strong> ${reportData.analysis.impacto_en_rendimiento}</td>
+          <td style="border: 1px solid #ccc; padding: 6px;"><strong>Impacto en Equipo:</strong> ${reportData.analysis.impacto_en_equipo}</td>
+        </tr>
+        <tr>
+          <td colspan="2" style="border: 1px solid #ccc; padding: 6px;"><strong>Rendimiento Predicho:</strong> ${reportData.analysis.rendimiento_predicho}</td>
+        </tr>
+        <tr>
+          <td colspan="2" style="border: 1px solid #ccc; padding: 6px;"><strong>Resumen General:</strong> ${reportData.analysis.resumen_general}</td>
+        </tr>
+        <tr>
+          <td colspan="2" style="border: 1px solid #ccc; padding: 6px;"><strong>Acciones Recomendadas:</strong> ${reportData.analysis.acciones_recomendadas}</td>
+        </tr>
+      </table>
+
+      <!-- GENERADO POR -->
+      <h3 style="background: #f0f0f0; padding: 6px; border: 1px solid #ccc; margin-top: 20px;">GENERADO POR</h3>
+      <table style="width: 100%; border-collapse: collapse;">
+        <tr>
+          <td style="border: 1px solid #ccc; padding: 6px;"><strong>Nombre:</strong> ${reportData.user.nombre}</td>
+          <td style="border: 1px solid #ccc; padding: 6px;"><strong>Email:</strong> ${reportData.user.email}</td>
+        </tr>
+      </table>
+    </div>
+  `;
 
     const opt = {
       margin: 0.5,
@@ -138,4 +163,6 @@ export class ReportsByPlayerComponent implements OnInit {
 
     html2pdf().set(opt).from(element).save();
   }
+
+
 }

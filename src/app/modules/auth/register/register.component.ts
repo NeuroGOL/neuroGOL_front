@@ -16,18 +16,27 @@ export class RegisterComponent {
   nombre = '';
   email = '';
   contrasena = '';
+  confirmarContrasena = '';
   profile_picture = '';
   isLoading = false;
+  errorMessage = ''; // NUEVO
 
   constructor(
     private authService: AuthService,
     private router: Router,
     private notificationService: NotificationService
-  ) {}
+  ) { }
 
   register() {
+    this.errorMessage = '';
+
     if (!this.nombre || !this.email || !this.contrasena) {
-      this.notificationService.showError('Todos los campos son obligatorios', 'Registro fallido');
+      this.errorMessage = 'Todos los campos son obligatorios';
+      return;
+    }
+
+    if (this.contrasena !== this.confirmarContrasena) {
+      this.errorMessage = 'Las contraseñas no coinciden';
       return;
     }
 
@@ -37,26 +46,32 @@ export class RegisterComponent {
       nombre: this.nombre,
       email: this.email,
       contrasena: this.contrasena,
-      role_id: 2, // Rol por defecto (usuario normal)
+      confirmar_contrasena: this.confirmarContrasena,
+      role_id: 2,
       profile_picture: this.profile_picture || 'assets/default-avatar.png'
     };
 
     this.authService.register(newUser).subscribe({
       next: () => {
-        this.notificationService.showSuccess('Registro exitoso', 'Bienvenido');
-        this.router.navigate(['/login']);
+        // 👇 Mostrar alerta de éxito
+        this.notificationService.showSuccess(
+          'Usuario registrado correctamente. Serás redirigido al login.',
+          '¡Registro Exitoso!'
+        );
+
+        // Redirigir después de 3 segundos (coincide con el timer de la alerta)
+        setTimeout(() => {
+          this.router.navigate(['/login']);
+        }, 3000);
+
         this.isLoading = false;
       },
       error: (err) => {
         this.isLoading = false;
-        console.error('❌ Error en registro:', err);
-
-        if (err.error?.errors) {
-          err.error.errors.forEach((errorMsg: any) => {
-            this.notificationService.showError(errorMsg.msg, 'Error en Registro');
-          });
+        if (err.error?.error) {
+          this.errorMessage = err.error.error;
         } else {
-          this.notificationService.showError('Error al registrarse. Intenta de nuevo.', 'Registro fallido');
+          this.errorMessage = 'Error al registrarse. Intenta de nuevo.';
         }
       }
     });

@@ -1,33 +1,59 @@
-<div class="player-form-container">
-  <h2>{{ isEditMode ? 'Editar Jugador' : 'Agregar Jugador' }}</h2>
-
-  <form (ngSubmit)="savePlayer()">
-    <label for="nombre">Nombre</label>
-    <input type="text" id="nombre" [(ngModel)]="player.nombre" name="nombre" required />
-
-    <label for="equipo">Equipo</label>
-    <select id="equipo" [(ngModel)]="player.equipo" name="equipo" required>
-      <option value="" disabled selected>Seleccione un equipo</option>
-      <option *ngFor="let equipo of equipos" [value]="equipo">{{ equipo }}</option>
-    </select>
-
-
-    <label for="nacionalidad">Nacionalidad</label>
-    <input type="text" id="nacionalidad" [(ngModel)]="player.nacionalidad" name="nacionalidad" required />
-
-    <label for="profile_picture">Foto de Perfil (URL)</label>
-    <input type="text" id="profile_picture" [(ngModel)]="player.profile_picture" name="profile_picture"
-      (input)="updatePreview()" />
-
-    <div class="preview" *ngIf="player.profile_picture">
-      <img [src]="player.profile_picture" alt="Vista previa" (error)="imageLoadError()" />
+<div class="container py-4 px-3">
+  <div class="card shadow-lg p-4 border-0 mx-auto" style="max-width: 600px;">
+    
+    <div class="text-center mb-4">
+      <h3 class="fw-bold mb-2" style="color: var(--primary-color)">
+        {{ isEditMode ? 'Editar Jugador' : 'Agregar Jugador' }}
+      </h3>
+      <p *ngIf="isEditMode && player?.nombre" class="text-primary fw-semibold m-0" style="font-size: 0.95rem;">
+        Editando a <strong>{{ player.nombre }}</strong>
+      </p>
     </div>
 
-    <div class="form-actions">
-      <button type="submit" class="btn-confirm">
-        {{ isEditMode ? 'Guardar Cambios' : 'Agregar Jugador' }}
-      </button>
-      <button type="button" class="btn-cancel" (click)="navigateToPlayers()">Cancelar</button>
-    </div>
-  </form>
+    <form (ngSubmit)="savePlayer()">
+      <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre completo</label>
+        <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="player.nombre" required />
+      </div>
+
+      <div class="mb-3">
+        <label for="equipo" class="form-label">Equipo</label>
+        <select class="form-select" id="equipo" name="equipo" [(ngModel)]="player.equipo" required>
+          <option value="" disabled selected>Seleccione un equipo</option>
+          <option *ngFor="let equipo of equipos" [value]="equipo">{{ equipo }}</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="nacionalidad" class="form-label">Nacionalidad</label>
+        <input type="text" class="form-control" id="nacionalidad" name="nacionalidad"
+          [(ngModel)]="player.nacionalidad" required />
+      </div>
+
+      <div class="mb-3">
+        <label for="profile_picture" class="form-label">Foto de Perfil (URL)</label>
+        <input type="text" class="form-control" id="profile_picture" name="profile_picture"
+          [(ngModel)]="player.profile_picture" (input)="updatePreview()" />
+      </div>
+
+      <div *ngIf="player.profile_picture" class="text-center mb-4">
+        <img [src]="player.profile_picture" alt="Vista previa" class="img-fluid rounded shadow"
+          style="max-height: 200px;" (error)="imageLoadError()" />
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-md-6 mb-2 mb-md-0">
+          <button type="submit" class="btn btn-success w-100"
+            [disabled]="!player.nombre || !player.equipo || !player.nacionalidad">
+            {{ isEditMode ? 'Guardar Cambios' : 'Agregar Jugador' }}
+          </button>
+        </div>
+        <div class="col-12 col-md-6">
+          <button type="button" class="btn btn-outline-secondary w-100" (click)="navigateToPlayers()">
+            Cancelar
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>

@@ -1,11 +1,11 @@
 -- 🔹 Crear tabla de roles
-CREATE TABLE role (
+CREATE TABLE roles (
     id SERIAL PRIMARY KEY,
     nombre VARCHAR(50) UNIQUE NOT NULL
 );
 
 -- Insertar roles por defecto
-INSERT INTO role (nombre) VALUES ('admin'), ('analista');
+INSERT INTO roles (nombre) VALUES ('admin'), ('analista');
 
 -- 🔹 Crear tabla de usuarios
 CREATE TABLE users (
@@ -19,7 +19,7 @@ CREATE TABLE users (
 );
 
 -- 🔹 Crear tabla de jugadores
-CREATE TABLE player (
+CREATE TABLE players (
     id SERIAL PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     equipo VARCHAR(100) NOT NULL,
@@ -31,10 +31,11 @@ CREATE TABLE player (
 -- 🔹 Crear tabla de declaraciones manuales (Datos ingresados por analistas)
 CREATE TABLE declarations (
     id SERIAL PRIMARY KEY,
-    player_id INT NOT NULL REFERENCES player(id) ON DELETE CASCADE,
+    player_id INT NOT NULL REFERENCES players(id) ON DELETE CASCADE,
     user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     categoria_texto VARCHAR(50) NOT NULL, -- "Previo al partido", "Post-partido", "Durante entrenamiento", "Lesión"
     texto TEXT NOT NULL, -- Comentario o declaración del jugador
+    fuente VARCHAR(100) NOT NULL, -- Ej: "ESPN", "Marca", "Instagram", "Rueda de prensa"
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -56,7 +57,7 @@ CREATE TABLE nlp_analysis (
 -- 🔹 Crear tabla de reportes (Consolidado final con información de la IA)
 CREATE TABLE reports (
     id SERIAL PRIMARY KEY,
-    player_id INT NOT NULL REFERENCES player(id) ON DELETE CASCADE,
+    player_id INT NOT NULL REFERENCES players(id) ON DELETE CASCADE,
     declaration_id INT NOT NULL REFERENCES declarations(id) ON DELETE CASCADE,
     nlp_analysis_id INT NOT NULL REFERENCES nlp_analysis(id) ON DELETE CASCADE,
     generado_por INT NOT NULL REFERENCES users(id) ON DELETE CASCADE, -- Usuario que generó el reporte
