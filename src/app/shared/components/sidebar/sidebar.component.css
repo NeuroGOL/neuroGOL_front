@@ -68,3 +68,7 @@ button.btn-outline-light {
   margin-left: auto;
   transition: transform 0.3s ease;
 }
+
+.grisesito {
+  color: #9ca3af !important; /* Tailwind's gray-400 */
+}

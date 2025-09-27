@@ -10,7 +10,7 @@
     <div *ngIf="!editMode" @fade>
       <div class="text-center mb-4">
         <h3 class="fw-bold mb-2" style="color: var(--primary-color)">Mi Perfil</h3>
-        <img [src]="updatedUser.profile_picture || 'https://via.placeholder.com/100'" 
+        <img [src]="updatedUser.profile_picture || '../../../../assets/sinfotodeperfil.webp'" 
              class="rounded-circle shadow-sm"
              style="width: 100px; height: 100px; object-fit: cover;" />
       </div>
@@ -29,7 +29,7 @@
     <!-- Formulario de edición -->
     <form *ngIf="editMode" (ngSubmit)="saveProfile()" class="row g-3" @fade>
       <div class="text-center">
-        <img [src]="updatedUser.profile_picture || 'https://via.placeholder.com/100'" 
+        <img [src]="updatedUser.profile_picture || '../../../../assets/sinfotodeperfil.webp'" 
              class="rounded-circle shadow-sm mb-2"
              style="width: 100px; height: 100px; object-fit: cover;" />
       </div>

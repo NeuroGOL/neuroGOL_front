@@ -129,4 +129,20 @@ export class AnalysisNplModalComponent {
       }
     });
   }
+
+  // Mapa de traducción
+  private emotionMap: Record<string, string> = {
+    anger: 'Ira',
+    disgust: 'Asco',
+    fear: 'Miedo',
+    joy: 'Alegría',
+    neutral: 'Neutral',
+    sadness: 'Tristeza',
+    surprise: 'Sorpresa'
+  };
+
+  translateEmotion(emotion?: string): string {
+    if (!emotion) return '';
+    return this.emotionMap[emotion.toLowerCase()] || emotion;
+  }
 }

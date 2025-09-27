@@ -1,9 +1,9 @@
 <div class="container py-5">
   <div class="card shadow border-0" style="background-color: var(--card-color); border-radius: 1rem;">
-    
+
     <!-- Header -->
     <div class="card-header d-flex justify-content-between align-items-center px-4 py-3"
-         style="background-color: var(--primary-color); color: white; border-top-left-radius: 1rem; border-top-right-radius: 1rem;">
+      style="background-color: var(--primary-color); color: white; border-top-left-radius: 1rem; border-top-right-radius: 1rem;">
       <h4 class="mb-0">Análisis de Declaración</h4>
       <button class="btn btn-outline-light btn-sm" (click)="router.navigate(['/dashboard/declarations'])">
         ← Volver
@@ -16,9 +16,8 @@
 
         <!-- Jugador -->
         <div class="col-md-4 d-flex flex-column align-items-center text-center">
-          <img [src]="player.profile_picture || 'assets/sinfoto.png'"
-               class="rounded-circle shadow mb-3"
-               style="width: 110px; height: 110px; object-fit: cover;">
+          <img [src]="player.profile_picture || 'assets/sinfoto.png'" class="rounded-circle shadow mb-3"
+            style="width: 110px; height: 110px; object-fit: cover;">
           <div>
             <p class="mb-1"><strong>Nombre:</strong> {{ player.nombre }}</p>
             <p class="mb-1"><strong>Equipo:</strong> {{ player.equipo }}</p>
@@ -47,7 +46,7 @@
           <div class="col-md-4">
             <strong style="color: var(--accent-color)">Emoción Detectada:</strong>
             <div class="badge bg-light text-dark border border-success px-3 py-1 mt-1">
-              {{ analysis.emocion_detectada }}
+              {{ translateEmotion(analysis.emocion_detectada) }}
             </div>
           </div>
           <div class="col-md-4">
@@ -68,8 +67,8 @@
 
       <!-- Botón -->
       <div class="text-end mt-4">
-        <button class="btn" style="background-color: var(--accent-color); color: white"
-                [disabled]="hasReport" (click)="generateReport()">
+        <button class="btn" style="background-color: var(--accent-color); color: white" [disabled]="hasReport"
+          (click)="generateReport()">
           {{ hasReport ? '✅ Reporte ya generado' : 'Generar Reporte' }}
         </button>
       </div>

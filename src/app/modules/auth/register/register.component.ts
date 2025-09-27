@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
+import { NotificationService } from '../../../core/services/notification.service';
 
 @Component({
   selector: 'app-register',
@@ -20,10 +21,14 @@ export class RegisterComponent {
   isLoading = false;
   errorMessage = ''; // NUEVO
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private notificationService: NotificationService
+  ) { }
 
   register() {
-    this.errorMessage = ''; // limpiar error anterior
+    this.errorMessage = '';
 
     if (!this.nombre || !this.email || !this.contrasena) {
       this.errorMessage = 'Todos los campos son obligatorios';
@@ -48,7 +53,17 @@ export class RegisterComponent {
 
     this.authService.register(newUser).subscribe({
       next: () => {
-        this.router.navigate(['/login']);
+        // 👇 Mostrar alerta de éxito
+        this.notificationService.showSuccess(
+          'Usuario registrado correctamente. Serás redirigido al login.',
+          '¡Registro Exitoso!'
+        );
+
+        // Redirigir después de 3 segundos (coincide con el timer de la alerta)
+        setTimeout(() => {
+          this.router.navigate(['/login']);
+        }, 3000);
+
         this.isLoading = false;
       },
       error: (err) => {

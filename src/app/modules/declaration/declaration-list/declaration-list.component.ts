@@ -81,7 +81,10 @@ export class DeclarationListComponent implements OnInit {
         this.nlpAnalyses.set(declarationId, analysis);
         this.notificationService.showSuccess('Análisis generado con éxito.');
       },
-      error: () => this.notificationService.showError('Error al generar análisis.')
+      error: (error) => {
+        console.error('Error al generar análisis:', error);
+        this.notificationService.showError('Error al generar análisis.');
+      }
     });
   }
 
@@ -114,27 +117,27 @@ export class DeclarationListComponent implements OnInit {
   }
 
   deleteDeclaration(declarationId: number) {
-  if (this.nlpAnalyses.has(declarationId)) {
-    this.notificationService.showWarning('No puedes eliminar esta declaración porque ya tiene un análisis asociado.');
-    return;
-  }
-
-  this.notificationService.showConfirmation(
-    'Eliminar declaración',
-    '¿Estás seguro de que deseas eliminar esta declaración?',
-  ).then((confirmed) => {
-    if (confirmed) {
-      this.declarationService.deleteDeclaration(declarationId).subscribe({
-        next: () => {
-          this.declarations = this.declarations.filter(d => d.id !== declarationId);
-          this.notificationService.showSuccess('Declaración eliminada correctamente.');
-        },
-        error: (err) => {
-          console.error('Error al eliminar declaración:', err);
-          this.notificationService.showError('Error al eliminar declaración', err);
-        }
-      });
+    if (this.nlpAnalyses.has(declarationId)) {
+      this.notificationService.showWarning('No puedes eliminar esta declaración porque ya tiene un análisis asociado.');
+      return;
     }
-  });
-}
+
+    this.notificationService.showConfirmation(
+      'Eliminar declaración',
+      '¿Estás seguro de que deseas eliminar esta declaración?',
+    ).then((confirmed) => {
+      if (confirmed) {
+        this.declarationService.deleteDeclaration(declarationId).subscribe({
+          next: () => {
+            this.declarations = this.declarations.filter(d => d.id !== declarationId);
+            this.notificationService.showSuccess('Declaración eliminada correctamente.');
+          },
+          error: (err) => {
+            console.error('Error al eliminar declaración:', err);
+            this.notificationService.showError('Error al eliminar declaración', err);
+          }
+        });
+      }
+    });
+  }
 } 

@@ -32,11 +32,11 @@
 
   <div class="mt-auto pt-4">
     <div class="d-flex align-items-center bg-opacity-10 bg-light rounded p-2 mb-3" *ngIf="user && !sidebarCollapsed">
-      <img [src]="user.profile_picture || 'assets/default-avatar.png'" class="rounded-circle me-2"
+      <img [src]="user.profile_picture || '../../../../assets/sinfotodeperfil.webp'" class="rounded-circle me-2"
         style="width: 36px; height: 36px; object-fit: cover;" />
       <div class="overflow-hidden">
         <div class="text-white fw-semibold text-truncate" style="max-width: 130px;">{{ user.nombre }}</div>
-        <small class="text-muted text-truncate d-block" style="max-width: 130px;">{{ user.email }}</small>
+        <small class="text-muted grisesito text-truncate d-block" style="max-width: 130px;">{{ user.email }}</small>
       </div>
     </div>
 
