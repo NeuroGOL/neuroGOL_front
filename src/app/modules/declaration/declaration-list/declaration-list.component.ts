@@ -10,11 +10,12 @@ import { NlpAnalysisService } from '../../../core/services/nlp-analysis.service'
 import { NotificationService } from '../../../core/services/notification.service';
 import { PlayerService } from '../../../core/services/player.service';
 import { UserService } from '../../../core/services/user.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-declaration-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './declaration-list.component.html',
   styleUrl: './declaration-list.component.css'
 })
@@ -24,6 +25,8 @@ export class DeclarationListComponent implements OnInit {
   users: Map<number, UserModel> = new Map();
   nlpAnalyses: Map<number, NlpAnalysisModel> = new Map();
   isLoading = false;
+  searchTerm: string = '';
+
 
   constructor(
     private declarationService: DeclarationService,
@@ -49,6 +52,7 @@ export class DeclarationListComponent implements OnInit {
       error: () => this.notificationService.showError('Error al cargar declaraciones.')
     });
   }
+
 
   loadPlayers() {
     this.playerService.getPlayers().subscribe({
@@ -114,6 +118,15 @@ export class DeclarationListComponent implements OnInit {
 
   navigateToEditDeclaration(id: number) {
     this.router.navigate(['/dashboard/declaration/edit', id]);
+  }
+
+  filteredDeclarations(): DeclarationModel[] {
+    const term = this.searchTerm.trim().toLowerCase();
+    if (!term) return this.declarations;
+    return this.declarations.filter(d =>
+      d.texto.toLowerCase().includes(term) ||
+      (d.categoria_texto?.toLowerCase().includes(term))
+    );
   }
 
   deleteDeclaration(declarationId: number) {
