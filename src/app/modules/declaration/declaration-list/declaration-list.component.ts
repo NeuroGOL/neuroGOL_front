@@ -123,10 +123,11 @@ export class DeclarationListComponent implements OnInit {
   filteredDeclarations(): DeclarationModel[] {
     const term = this.searchTerm.trim().toLowerCase();
     if (!term) return this.declarations;
-    return this.declarations.filter(d =>
-      d.texto.toLowerCase().includes(term) ||
-      (d.categoria_texto?.toLowerCase().includes(term))
-    );
+
+    return this.declarations.filter(d => {
+      const playerName = this.players.get(d.player_id)?.nombre.toLowerCase() || '';
+      return playerName.includes(term);
+    });
   }
 
   deleteDeclaration(declarationId: number) {

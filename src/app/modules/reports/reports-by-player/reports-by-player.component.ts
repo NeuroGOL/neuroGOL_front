@@ -12,11 +12,15 @@ import { DeclarationModel } from '../../../core/models/declaration.model';
 import { UserModel } from '../../../core/models/user.model';
 import { CommonModule } from '@angular/common';
 import html2pdf from 'html2pdf.js';
+import { ReportsSummaryComponent } from '../reports-summary/reports-summary.component';
 
 @Component({
   selector: 'app-reports-by-player',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    ReportsSummaryComponent
+  ],
   templateUrl: './reports-by-player.component.html',
   styleUrl: './reports-by-player.component.css'
 })

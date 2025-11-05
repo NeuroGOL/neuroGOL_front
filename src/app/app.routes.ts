@@ -15,6 +15,7 @@ import { SidebarComponent } from './shared/components/sidebar/sidebar.component'
 import { ReportsByPlayerComponent } from './modules/reports/reports-by-player/reports-by-player.component';
 import { EditarPerfilComponent } from './modules/perfil/editar-perfil/editar-perfil.component';
 import { AnalysisNplModalComponent } from './modules/analysis/analysis-npl-modal/analysis-npl-modal.component';
+import { ReportsSummaryComponent } from './modules/reports/reports-summary/reports-summary.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -40,7 +41,9 @@ export const routes: Routes = [
       { path: 'analisis/:id', component: AnalysisNplModalComponent },
 
       { path: 'reports', component: ReportsListComponent },
+      { path: 'reports/summary', component: ReportsSummaryComponent },
       { path: 'reports/:id', component: ReportsByPlayerComponent },
+
 
       { path: 'profile', component: EditarPerfilComponent }
     ]

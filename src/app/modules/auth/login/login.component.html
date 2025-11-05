@@ -8,32 +8,20 @@
       <p class="text-muted small fade-up delay-1">Inicia sesión para continuar</p>
     </div>
 
-    <form (submit)="login()" autocomplete="on" class="fade-up delay-2">
+    <form #loginForm="ngForm" (ngSubmit)="login()" autocomplete="on" class="fade-up delay-2">
       <div class="mb-3">
         <label for="email" class="form-label">Correo electrónico</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          [(ngModel)]="credentials.email"
-          class="form-control"
-          required
+        <input type="email" id="email" name="email" [(ngModel)]="credentials.email" class="form-control" required
           [ngClass]="{ 'is-invalid': errorMessage && !credentials.email.trim() }" />
       </div>
 
       <div class="mb-3">
         <label for="password" class="form-label">Contraseña</label>
-        <input
-          type="password"
-          id="password"
-          name="contrasena"
-          [(ngModel)]="credentials.contrasena"
-          class="form-control"
-          required
-          [ngClass]="{ 'is-invalid': errorMessage && credentials.contrasena.length < 6 }" />
+        <input type="password" id="password" name="contrasena" [(ngModel)]="credentials.contrasena" class="form-control"
+          required minlength="6" [ngClass]="{ 'is-invalid': errorMessage && credentials.contrasena.length < 6 }" />
       </div>
 
-      <button type="submit" [disabled]="isLoading" class="btn w-100 py-2 mt-2"
+      <button type="submit" class="btn w-100 py-2 mt-2"
         style="background-color: var(--accent-color); color: white; font-weight: 600; transition: all 0.3s;">
         Acceder
       </button>
