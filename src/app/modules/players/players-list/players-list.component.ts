@@ -5,6 +5,7 @@ import { PlayerModel } from '../../../core/models/player.model';
 import { NotificationService } from '../../../core/services/notification.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; // Necesario para ngModel
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-players-list',
@@ -21,7 +22,8 @@ export class PlayersListComponent implements OnInit {
   constructor(
     private playerService: PlayerService,
     private router: Router,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
@@ -65,6 +67,10 @@ export class PlayersListComponent implements OnInit {
         });
       }
     });
+  }
+
+  get isAdmin(): boolean {
+    return this.authService.isAdmin();
   }
 
   navigateToNewPlayer() {

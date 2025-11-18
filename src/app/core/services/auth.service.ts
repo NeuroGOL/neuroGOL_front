@@ -76,4 +76,11 @@ export class AuthService {
   isAuthenticated(): Observable<boolean> {
     return this.authState.asObservable();
   }
+
+  /** 🔹 Verifica si el usuario es administrador */
+  isAdmin(): boolean {
+    const user = this.getUser();
+    return user?.role_id === 1;
+  }
+
 }

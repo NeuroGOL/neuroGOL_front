@@ -11,6 +11,7 @@ import { NotificationService } from '../../../core/services/notification.service
 import { PlayerService } from '../../../core/services/player.service';
 import { UserService } from '../../../core/services/user.service';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-declaration-list',
@@ -33,6 +34,7 @@ export class DeclarationListComponent implements OnInit {
     private playerService: PlayerService,
     private userService: UserService,
     private nlpAnalysisService: NlpAnalysisService,
+    private authService: AuthService,
     private router: Router,
     private notificationService: NotificationService
   ) { }
@@ -129,6 +131,11 @@ export class DeclarationListComponent implements OnInit {
       return playerName.includes(term);
     });
   }
+
+  get isAdmin(): boolean {
+    return this.authService.isAdmin();
+  }
+
 
   deleteDeclaration(declarationId: number) {
     if (this.nlpAnalyses.has(declarationId)) {
