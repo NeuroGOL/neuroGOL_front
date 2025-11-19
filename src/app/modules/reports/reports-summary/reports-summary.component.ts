@@ -128,12 +128,13 @@ export class ReportsSummaryComponent implements OnChanges {
 
   getEmotionColor(emocion: string): string {
     const colorMap: { [key: string]: string } = {
-      joy: 'rgba(255, 206, 86, 0.7)',
       anger: 'rgba(255, 99, 132, 0.7)',
-      sadness: 'rgba(54, 162, 235, 0.7)',
+      disgust: 'rgba(75, 192, 192, 0.7)',
       fear: 'rgba(153, 102, 255, 0.7)',
+      joy: 'rgba(255, 206, 86, 0.7)',
+      neutral: 'rgba(201, 203, 207, 0.7)',
+      sadness: 'rgba(54, 162, 235, 0.7)',
       surprise: 'rgba(255, 159, 64, 0.7)',
-      neutral: 'rgba(201, 203, 207, 0.7)'
     };
     return colorMap[emocion] || 'rgba(100, 100, 100, 0.7)'; // color por defecto
   }

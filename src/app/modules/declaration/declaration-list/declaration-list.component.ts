@@ -88,8 +88,16 @@ export class DeclarationListComponent implements OnInit {
         this.notificationService.showSuccess('Análisis generado con éxito.');
       },
       error: (error) => {
+        
         console.error('Error al generar análisis:', error);
-        this.notificationService.showError('Error al generar análisis.');
+         const errMsg =
+          error?.error?.error || // ← Aquí accedemos al mensaje real del backend
+          error?.error?.message ||
+          error?.message ||
+          (typeof error === 'string' ? error : JSON.stringify(error)) ||
+          'Error desconocido';
+
+        this.notificationService.showError(`${errMsg}`);
       }
     });
   }
