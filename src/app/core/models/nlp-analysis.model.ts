@@ -2,6 +2,7 @@ export interface NlpAnalysisModel {
   id?: number;
   declaration_id: number;  
   emocion_detectada: string;
+  emocion_predicha: string;
   tendencia_emocional: string;
   impacto_en_rendimiento: string;
   impacto_en_equipo: string;

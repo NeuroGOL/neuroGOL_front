@@ -123,10 +123,19 @@ export class AnalysisNplModalComponent {
         this.isLoading = false;
       },
       error: (error) => {
-        console.error('❌ Error al generar el reporte:', error); // <-- Aquí
-        this.notificationService.showError('No se pudo generar el reporte');
+        console.error('❌ Error al generar el reporte:', error);
+
+        const errMsg =
+          error?.error?.error || // ← Aquí accedemos al mensaje real del backend
+          error?.error?.message ||
+          error?.message ||
+          (typeof error === 'string' ? error : JSON.stringify(error)) ||
+          'Error desconocido';
+
+        this.notificationService.showError(`${errMsg}`);
         this.isLoading = false;
       }
+
     });
   }
 

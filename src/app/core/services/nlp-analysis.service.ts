@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, Observable, tap, throwError } from 'rxjs';
 import { environment } from '../../../environments/environment.production';
 import { NlpAnalysisModel } from '../models/nlp-analysis.model';
 
@@ -10,7 +10,7 @@ import { NlpAnalysisModel } from '../models/nlp-analysis.model';
 export class NlpAnalysisService {
   private apiUrl = `${environment.apiUrl}/nlp`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   /** 🔹 Obtener todos los análisis NLP */
   getAllNlpAnalyses(): Observable<NlpAnalysisModel[]> {
@@ -24,11 +24,30 @@ export class NlpAnalysisService {
 
   /** 🔹 Generar un análisis NLP para una declaración */
   generateNlpAnalysis(declarationId: number): Observable<NlpAnalysisModel> {
-    console.log('📤 Enviando datos al backend:', { declaration_id: declarationId });
-  
-    return this.http.post<NlpAnalysisModel>(`${this.apiUrl}`, { declaration_id: declarationId });
+    const payload = { declaration_id: declarationId };
+
+    // Loguear todo el JSON que se enviará
+    console.log('📤 JSON enviado al backend:', JSON.stringify(payload, null, 2));
+
+    return this.http.post<NlpAnalysisModel>(
+      `${this.apiUrl}`,
+      payload
+      // observe: 'body' is the default and returns the typed body (NlpAnalysisModel)
+    ).pipe(
+      tap(res => {
+        console.log('✅ Respuesta del backend (body):', res);
+      }),
+      catchError(err => {
+        console.error('❌ Error completo del backend:', err);
+        if (err.error) {
+          console.error('📄 Body del error:', err.error);
+        }
+        return throwError(() => err);
+      })
+    );
   }
-  
+
+
   /** 🔹 Eliminar un análisis NLP */
   deleteNlpAnalysis(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);

@@ -10,11 +10,13 @@ import { NlpAnalysisService } from '../../../core/services/nlp-analysis.service'
 import { NotificationService } from '../../../core/services/notification.service';
 import { PlayerService } from '../../../core/services/player.service';
 import { UserService } from '../../../core/services/user.service';
+import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-declaration-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './declaration-list.component.html',
   styleUrl: './declaration-list.component.css'
 })
@@ -24,12 +26,15 @@ export class DeclarationListComponent implements OnInit {
   users: Map<number, UserModel> = new Map();
   nlpAnalyses: Map<number, NlpAnalysisModel> = new Map();
   isLoading = false;
+  searchTerm: string = '';
+
 
   constructor(
     private declarationService: DeclarationService,
     private playerService: PlayerService,
     private userService: UserService,
     private nlpAnalysisService: NlpAnalysisService,
+    private authService: AuthService,
     private router: Router,
     private notificationService: NotificationService
   ) { }
@@ -49,6 +54,7 @@ export class DeclarationListComponent implements OnInit {
       error: () => this.notificationService.showError('Error al cargar declaraciones.')
     });
   }
+
 
   loadPlayers() {
     this.playerService.getPlayers().subscribe({
@@ -82,8 +88,16 @@ export class DeclarationListComponent implements OnInit {
         this.notificationService.showSuccess('Análisis generado con éxito.');
       },
       error: (error) => {
+        
         console.error('Error al generar análisis:', error);
-        this.notificationService.showError('Error al generar análisis.');
+         const errMsg =
+          error?.error?.error || // ← Aquí accedemos al mensaje real del backend
+          error?.error?.message ||
+          error?.message ||
+          (typeof error === 'string' ? error : JSON.stringify(error)) ||
+          'Error desconocido';
+
+        this.notificationService.showError(`${errMsg}`);
       }
     });
   }
@@ -115,6 +129,21 @@ export class DeclarationListComponent implements OnInit {
   navigateToEditDeclaration(id: number) {
     this.router.navigate(['/dashboard/declaration/edit', id]);
   }
+
+  filteredDeclarations(): DeclarationModel[] {
+    const term = this.searchTerm.trim().toLowerCase();
+    if (!term) return this.declarations;
+
+    return this.declarations.filter(d => {
+      const playerName = this.players.get(d.player_id)?.nombre.toLowerCase() || '';
+      return playerName.includes(term);
+    });
+  }
+
+  get isAdmin(): boolean {
+    return this.authService.isAdmin();
+  }
+
 
   deleteDeclaration(declarationId: number) {
     if (this.nlpAnalyses.has(declarationId)) {

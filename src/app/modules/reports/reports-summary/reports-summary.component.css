@@ -1,0 +1,23 @@
+/* Limita el tamaño de los gráficos */
+.canvas-responsive {
+  max-height: 200px;
+  object-fit: contain;
+  width: 100%;
+}
+
+/* Ajusta la tarjeta de emociones por fecha */
+.timeline-card {
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+/* Reduce padding en tarjetas grandes */
+.card-body {
+  padding: 1rem !important;
+}
+
+/* Títulos más compactos */
+.card-body h5 {
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+}

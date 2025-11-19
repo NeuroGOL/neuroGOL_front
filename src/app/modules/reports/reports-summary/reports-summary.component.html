@@ -1,0 +1,52 @@
+<div class="container my-3">
+  <div class="card shadow-lg border-0 rounded-4">
+    <div class="card-body p-4">
+      <h2 class="ext-primary mb-4 textoPrimario">
+        <i class="bi bi-bar-chart me-2 textoPrimario"></i>
+        Resumen de reportes de {{ playerName }}
+      </h2>
+
+      <div class="row g-4">
+
+        <!-- Rendimiento promedio -->
+        <div class="col-12 col-md-4">
+          <div class="card text-center border-0 shadow-sm h-100">
+            <div class="card-body">
+              <h5 class="fw-semibold mb-2 text-secondary">
+                <i class="bi bi-activity me-1"></i> Rendimiento promedio
+              </h5>
+              <span class="badge bg-success fs-4 px-3 py-2">
+                {{ rendimientoPromedio.toFixed(2) }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Distribución de emociones -->
+        <div class="col-12 col-md-8">
+          <div class="card border-0 shadow-sm h-100">
+            <div class="card-body">
+              <h5 class="fw-semibold mb-3 text-secondary">
+                <i class="bi bi-emoji-smile me-1"></i> Distribución de emociones
+              </h5>
+              <canvas id="emotionChart" class="canvas-responsive" height="450"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Línea de tiempo de emociones -->
+        <div class="col-12">
+          <div class="card border-0 shadow-sm h-100">
+            <div class="card-body">
+              <h5 class="fw-semibold mb-3 text-secondary">
+                <i class="bi bi-calendar2-week me-1"></i> Emociones por fecha
+              </h5>
+              <canvas id="emotionTimelineChart" class="canvas-responsive"></canvas>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

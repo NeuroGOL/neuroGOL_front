@@ -12,11 +12,15 @@ import { DeclarationModel } from '../../../core/models/declaration.model';
 import { UserModel } from '../../../core/models/user.model';
 import { CommonModule } from '@angular/common';
 import html2pdf from 'html2pdf.js';
+import { ReportsSummaryComponent } from '../reports-summary/reports-summary.component';
 
 @Component({
   selector: 'app-reports-by-player',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    ReportsSummaryComponent
+  ],
   templateUrl: './reports-by-player.component.html',
   styleUrl: './reports-by-player.component.css'
 })
@@ -32,6 +36,31 @@ export class ReportsByPlayerComponent implements OnInit {
 
   playerId!: number;
 
+  private emotionMap: Record<string, string> = {
+    anger: 'Enojo',
+    disgust: 'Disgusto',
+    fear: 'Miedo',
+    joy: 'Alegría',
+    neutral: 'Neutral',
+    sadness: 'Tristeza',
+    surprise: 'Sorpresa'
+  };
+
+  private emotionColors: Record<string, string> = {
+    anger: 'rgba(255, 99, 132, 0.7)',      // rojo
+    disgust: 'rgba(75, 192, 192, 0.7)',    // morado
+    fear: 'rgba(153, 102, 255, 0.7)',       // gris oscuro
+    joy: 'rgba(255, 206, 86, 0.7)',        // amarillo
+    neutral: 'rgba(201, 203, 207, 0.7)',    // gris
+    sadness: 'rgba(54, 162, 235, 0.7)',    // azul
+    surprise: 'rgba(255, 159, 64, 0.7)'    // verde agua
+  };
+
+  getEmotionColor(emotion?: string): string {
+    if (!emotion) return '#6c757d'; // gris por defecto
+    return this.emotionColors[emotion.toLowerCase()] || '#6c757d';
+  }
+
   constructor(
     private route: ActivatedRoute,
     private reportsService: ReportsService,
@@ -44,6 +73,11 @@ export class ReportsByPlayerComponent implements OnInit {
   ngOnInit(): void {
     this.playerId = Number(this.route.snapshot.paramMap.get('id'));
     this.loadReports();
+  }
+
+  translateEmotion(emotion?: string): string {
+    if (!emotion) return '';
+    return this.emotionMap[emotion.toLowerCase()] || emotion;
   }
 
   async loadReports() {
@@ -124,7 +158,7 @@ export class ReportsByPlayerComponent implements OnInit {
       <h3 style="background: #f0f0f0; padding: 6px; border: 1px solid #ccc; margin-top: 20px;">ANÁLISIS DE INTELIGENCIA ARTIFICIAL</h3>
       <table style="width: 100%; border-collapse: collapse;">
         <tr>
-          <td style="border: 1px solid #ccc; padding: 6px;"><strong>Emoción Detectada:</strong> ${reportData.analysis.emocion_detectada}</td>
+          <td style="border: 1px solid #ccc; padding: 6px;"><strong>Emoción Detectada:</strong> ${this.translateEmotion(reportData.analysis.emocion_detectada)}</td>
           <td style="border: 1px solid #ccc; padding: 6px;"><strong>Tendencia Emocional:</strong> ${reportData.analysis.tendencia_emocional}</td>
         </tr>
         <tr>

@@ -7,6 +7,10 @@
   --error-color: #dc2626;
 }
 
+.textoPrimario {
+  color: var(--primary-color) !important;
+}
+
 body {
   background-color: var(--bg-color);
   color: var(--text-color);
